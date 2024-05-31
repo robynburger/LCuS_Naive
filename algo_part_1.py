@@ -1,4 +1,4 @@
-s = "ABCBBCABABAC"
+s = "babbab"
 n = len(s)
 A = [0] * n
 
@@ -24,14 +24,15 @@ for i in range(len(A)):
 print(A)
 
 c = 0
-l = 1
-for k in range(0, n-2):
+l = 0
+for k in range(0, n-1):
     t = 0
-    for a in range(0, k-1):
-        if A[a] > k:
+    for a in range(0, k):
+        if A[a] > (k+1):
             t = t + 1
     if t > c:
         c = t
         l = k
+print(s[l])
 print(l)
     
