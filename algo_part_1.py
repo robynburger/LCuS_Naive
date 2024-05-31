@@ -22,4 +22,16 @@ for i in range(len(A)):
         A[i] += 1
 
 print(A)
+
+c = 0
+l = 1
+for k in range(0, n-2):
+    t = 0
+    for a in range(0, k-1):
+        if A[a] > k:
+            t = t + 1
+    if t > c:
+        c = t
+        l = k
+print(l)
     
