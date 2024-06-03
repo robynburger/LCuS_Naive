@@ -21,13 +21,13 @@ def LLCS(seq1, a, seq2, b, seq3, c, T):
                                 LLCS(seq1, a, seq2, b-1, seq3, c, T), 
                                 LLCS(seq1, a, seq2, b, seq3, c-1, T)    )
     # else we have stored a value for LLCS a, b, c
-    print(T)
+    # print(T)
     return T[a][b][c]
 
 def func(seq1, seq2, seq3):
     a, b, c = len(seq1), len(seq2), len(seq3)
     T = [ [ [-1 for x in range(c+1)] for y in range(b+1) ] for x in range(a+1) ]
-    print(T)
+    # print(T)
     return LLCS(seq1, a, seq2, b, seq3, c, T)
 
 """seq1 = "abcb"
@@ -35,27 +35,35 @@ seq2 = "baaaacb"
 seq3 = "bdacdb"         # longest cubic subsequence is bcb
 """
 
-seq1 = "a"
+"""seq1 = "a"
 seq2 = "aa"
-seq3 = "a" 
+seq3 = "a" """
 
-whole_seq = "aaaa"
+# buggy case
+seq1 = "ab"
+seq2 = "c"
+seq3 = "bbaaaacbbdacdb"
+
+print(func(seq1, seq2, seq3))
+
+whole_seq = "abcbbaaaacbbdacdb"
 
 def main(whole_seq):
     # test all possible breakpoints
-    k_list = []
-    for x in range(len(whole_seq)):
-        seq1 = whole_seq[:x]
-        for z in range(x+1, len(whole_seq)):
-            seq2 = whole_seq[x:z]
-            seq3 = whole_seq[z:]
-            k_list.append(func(seq1, seq2, seq3))
+    break_list = []
+    for i in range(len(whole_seq)):
+        seq1 = whole_seq[:i]
+        for k in range(i+1, len(whole_seq)):
+            seq2 = whole_seq[i:k]
+            seq3 = whole_seq[k:]
+            break_list.append(func(seq1, seq2, seq3))
+            print(func(seq1, seq2, seq3))
             print(f"seq1: {seq1}, seq2: {seq2}, seq3: {seq3}")
-    print(k_list)
-    return max(k_list)
+    # print(func(seq1, seq2, seq3))
+    return max(break_list)
 
 ans = main(whole_seq)
 
-print(f"{ans} is length of the LCS")
+# print(f"{ans} is length of the LCS")
 print(f"{count} is func call count")
 
