@@ -65,6 +65,6 @@ def main(whole_seq):
 
 ans = main(whole_seq)
 
-# print(f"{ans} is length of the LCS")
+print(f"{ans} is length of the LCS")
 print(f"{count} is func call count")
 
