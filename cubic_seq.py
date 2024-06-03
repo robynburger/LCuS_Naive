@@ -37,18 +37,19 @@ def LTCS(s):
 
 def f(s, i, j, k, l, m):
   global mem
-# case 1
-
+# case 1 
+  print("i=", i, "j=", j, "k=", k, "l=", l)
   if 0 <= i < j <= k < l <= m: 
     if s[i] == s[k] == s[j]:
       print("case 1")
       mem[i][j][k][l][m] = mem[i-1][j][k-1][l][m] + 1
       print("mem[i][j][k][l][m]= ", mem[i][j][k][l][m])
 
-    else:
+    elif i >= 0 and j >= 0 and k >= 0 and l >= 0:
       print("case 1.1")
       # print("mem[i-1][j][k][l][m] = ", mem[i-1][j][k][l][m])
       if mem[i-1][j][k][l][m] == -1 or mem[i-1][j][k][l][m] == -2:
+
         mem[i-1][j][k][l][m] =f (s, i-1, j, k, l, m)
       if mem[i][j][k-1][l][m] == -1 or mem[i][j][k-1][l][m] == -2:
         mem[i][j][k-1][l][m] = f(s, i, j, k-1, l, m)
@@ -68,4 +69,4 @@ def f(s, i, j, k, l, m):
     mem[i][j][k][l][m] = -2
     print("mem[i][j][k][l][m]= ", mem[i][j][k][l][m])
 
-print("Test: ", LTCS('aaa'))
+print("Test: ", LTCS('abcabcabc'))
