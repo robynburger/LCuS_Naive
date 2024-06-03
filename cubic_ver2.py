@@ -6,6 +6,7 @@ LLCS - algorithm for the Length of the Longest Cubic Subsequence
 # a is length of seq1, b is length of seq2, c is length of seq3
 
 count = 0
+#LLCS is O(n^3), but called n^2 times, so O(n^5)
 def LLCS(seq1, a, seq2, b, seq3, c, T):
     # track num of func calls
     global count
@@ -26,29 +27,14 @@ def LLCS(seq1, a, seq2, b, seq3, c, T):
 
 # takes in three substrings and returns the length of their LCS
 def func(seq1, seq2, seq3):
-    a, b, c = len(seq1), len(seq2), len(seq3)
-    T = [ [ [-1 for x in range(c+1)] for y in range(b+1) ] for x in range(a+1) ]
+    a, b, c = len(seq1), len(seq2), len(seq3) #0(1)
+    T = [ [ [-1 for x in range(c+1)] for y in range(b+1) ] for x in range(a+1) ] #O(n)
     # print(T)
     return LLCS(seq1, a, seq2, b, seq3, c, T)
 
-"""seq1 = "abcb"
-seq2 = "baaaacb"
-seq3 = "bdacdb"         # longest cubic subsequence is bcb
-"""
-
-"""seq1 = "a"
-seq2 = "aa"
-seq3 = "a" """
-
-# buggy case
-seq1 = "ab"
-seq2 = "c"
-seq3 = "bbaaaacbbdacdb"
-
-print(func(seq1, seq2, seq3))
-
 whole_seq = "abcbbaaaacbbdacdb"
 
+# 0(n^2)
 def main(whole_seq):
     # test all possible breakpoints
     break_list = []
