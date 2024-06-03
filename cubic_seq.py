@@ -23,7 +23,6 @@
 mem = []
 
 def LTCS(s):
-  ans = 0  # greatest length subsequence so far
   le = len(s)  # 1-based length of input string s
   m = le - 1
   global mem
