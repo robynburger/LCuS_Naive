@@ -24,6 +24,7 @@ def LLCS(seq1, a, seq2, b, seq3, c, T):
     # print(T)
     return T[a][b][c]
 
+# takes in three substrings and returns the length of their LCS
 def func(seq1, seq2, seq3):
     a, b, c = len(seq1), len(seq2), len(seq3)
     T = [ [ [-1 for x in range(c+1)] for y in range(b+1) ] for x in range(a+1) ]
