@@ -35,7 +35,7 @@ def main(whole_seq):
     k_list = []
     for z in range(len(whole_seq)):
         seq1 = whole_seq[:z]
-        seq2 = whole_seq[z+1:]
+        seq2 = whole_seq[z:]
         k_list.append(func(seq1, seq2))
     print(k_list)
     return max(k_list)
