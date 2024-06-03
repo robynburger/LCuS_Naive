@@ -46,12 +46,11 @@ def main(whole_seq):
     k_list = []
     for x in range(len(whole_seq)):
         seq1 = whole_seq[:x]
-        y = x+1
-        for z in range(y+1, len(whole_seq)):
-            seq2 = whole_seq[y:z]
-            seq3 = whole_seq[z+1:]
+        for z in range(x+1, len(whole_seq)):
+            seq2 = whole_seq[x:z]
+            seq3 = whole_seq[z:]
             k_list.append(func(seq1, seq2, seq3))
-            print(f"x: {x}, y: {y}, z: {z}, seq1: {seq1}, seq2: {seq2}, seq3: {seq3}")
+            print(f"seq1: {seq1}, seq2: {seq2}, seq3: {seq3}")
     print(k_list)
     return max(k_list)
 
