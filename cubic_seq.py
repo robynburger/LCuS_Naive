@@ -38,6 +38,7 @@ def LTCS(s):
 def f(s, i, j, k, l, m):
   global mem
 # case 1
+
   if 0 <= i < j <= k < l <= m: 
     if s[i] == s[k] == s[j]:
       print("case 1")
