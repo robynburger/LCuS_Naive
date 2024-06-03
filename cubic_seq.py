@@ -28,32 +28,43 @@ def LTCS(s):
   global mem
   mem = [[[[[-1 for _ in range(m+1)] for _ in range(m+1)] for _ in range(m+1)] for _ in range(m+1)] for _ in range(m+1)]
     # Filling in memoization table
-  for i in range (0, le):
-    for j in range(0, le):
-      for k in range(0, le):
-        for l in range(0, le):
-           f(s, i, j, k, l, m)
-  return mem[m][m][m][m][m]
+  for l in range (0, le):
+    for k in range (0, l):
+        for j in range (0, k+1): # need?
+           for i in range (0, j):
+            f(s, i, j, k, l, m)
+  return mem
 
 def f(s, i, j, k, l, m):
   global mem
 # case 1
   if 0 <= i < j <= k < l <= m: 
     if s[i] == s[k] == s[j]:
-      return f(s, i-1, j, k-1, l, m) + 1
+      print("case 1")
+      mem[i][j][k][l][m] = mem[i-1][j][k-1][l][m] + 1
+      print("mem[i][j][k][l][m]= ", mem[i][j][k][l][m])
+
     else:
-      if mem[i-1][j][k][l][m] == -1:
+      print("case 1.1")
+      # print("mem[i-1][j][k][l][m] = ", mem[i-1][j][k][l][m])
+      if mem[i-1][j][k][l][m] == -1 or mem[i-1][j][k][l][m] == -2:
         mem[i-1][j][k][l][m] =f (s, i-1, j, k, l, m)
-      if mem[i][j][k-1][l][m] == -1:
+      if mem[i][j][k-1][l][m] == -1 or mem[i][j][k-1][l][m] == -2:
         mem[i][j][k-1][l][m] = f(s, i, j, k-1, l, m)
-      if mem[i][j][k][l][m-1] == -1:
+      if mem[i][j][k][l][m-1] == -1 or mem[i][j][k][l][m-1] == -2:
         mem[i][j][k][l][m-1] = f(s, i, j, k, l, m-1)
-      return max(mem[i-1][j][k][l][m], mem[i][j][k-1][l][m],mem[i][j][k][l][m-1])
+      mem[i][j][k][l][m] = max(mem[i-1][j][k][l][m], mem[i][j][k-1][l][m],mem[i][j][k][l][m-1])
+      print("mem[i][j][k][l][m]= ", mem[i][j][k][l][m])
+
 # case 2
   if i >= -1 and j >= -1 or k >= -1 or l >= -1 or m >= -1:
-    return 0
+    print("case 2")
+    mem[i][j][k][l][m] = 0
+    print("mem[i][j][k][l][m]= ", mem[i][j][k][l][m])
 # case 3 
   if i < -1 or j < -1 or k < -1 or l < -1 or m < -1:
-    return -1 
-  
-print("Test: ", LTCS('aaa'), "mem:",)
+    print("case 3")
+    mem[i][j][k][l][m] = -2
+    print("mem[i][j][k][l][m]= ", mem[i][j][k][l][m])
+
+print("Test: ", LTCS('aaa'))
