@@ -56,4 +56,4 @@ def f(s, i, j, k, l, m):
   if i < -1 or j < -1 or k < -1 or l < -1 or m < -1:
     return -1 
   
-print("Test: ", LTCS('aaa'))
+print("Test: ", LTCS('aaa'), "mem:",)
