@@ -7,12 +7,14 @@ def LCS(s):
   global T 
   T = [[[[[0 for _ in range(n)] for _ in range(n)] for _ in range(n)] for _ in range(n)] for _ in range(n)]
   f(T, s)
+  # returns value in bottom right corner
   return T[n-1][n-1][n-1][n-1][n-1]
 
+# allows us to index from i to n
 def changeStr(s):
   return " " + s
 
-# Updates the table T with the values for each m, i, j, k, l combination 
+# Populates the table T with the values for each m, i, j, k, l combination 
 def f(T, s):
   n = len(s)
   s = changeStr(s)
