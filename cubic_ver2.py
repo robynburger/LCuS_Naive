@@ -6,7 +6,7 @@ LLCS - algorithm for the Length of the Longest Cubic Subsequence
 # a is length of seq1, b is length of seq2, c is length of seq3
 
 count = 0
-#LLCS is O(n^3), but called n^2 times, so O(n^5)
+# LLCS is O(n^3), but called n^2 times, so O(n^5)
 def LLCS(seq1, a, seq2, b, seq3, c, T):
     # track num of func calls
     global count
@@ -32,7 +32,7 @@ def func(seq1, seq2, seq3):
     # print(T)
     return LLCS(seq1, a, seq2, b, seq3, c, T)
 
-whole_seq = "abcbbaaaacbbdacdb"
+whole_seq = "abcdefghijklaa"
 
 # 0(n^2)
 def main(whole_seq):
