@@ -1,10 +1,8 @@
 # This algorithm produces the LCS length, considering non-consecutive substrings 
-global T
 
 # Given a string s of length n, LCS(s) returns the length of the LCS 
 def LCS(s):
-  n = len(s) 
-  global T 
+  n = len(s)
   T = [[[[[0 for _ in range(n)] for _ in range(n)] for _ in range(n)] for _ in range(n)] for _ in range(n)]
   f(T, s)
   # returns value in bottom right corner
