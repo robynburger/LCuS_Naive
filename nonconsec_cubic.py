@@ -6,12 +6,16 @@ def LCS(s):
   n = len(s) 
   global T 
   T = [[[[[0 for _ in range(n)] for _ in range(n)] for _ in range(n)] for _ in range(n)] for _ in range(n)]
-  f(T, s, n, n, n, n, n)
-  return T#[n-1][n-1][n-1][n-1][n-1]
+  f(T, s)
+  return T[n-1][n-1][n-1][n-1][n-1]
+
+def changeStr(s):
+  return " " + s
 
 # Updates the table T with the values for each m, i, j, k, l combination 
-def f(T, s,  m, i, j, k, l):
+def f(T, s):
   n = len(s)
+  s = changeStr(s)
   for m in range(1, n+1):
     print("m", m)
     for i in range (1, m+1): 
@@ -24,13 +28,16 @@ def f(T, s,  m, i, j, k, l):
             print("l", l)
             # case 1, character is matched
             print("hello2")
-            if s[i-1] == s[j-1] == s[m-1]: 
-              print("entered case 1, m, i, j, k,l", m, i, j, k, l)
-              T[m][i][j][k][l] = T[m][i-1][j][k][l] + 1 
+            if s[i] == s[j] == s[m]: 
+              print(f"entered case 1 - m: {m}, i: {i}, j: {j}, k: {k}, l: {l}")
+              T[m-1][i-1][j-1][k-1][l-1] = T[m-1][i-2][j-1][k-1][l-1] + 1 
+              print("table val:", T[m-1][i-1][j-1][k-1][l-1])
             # case 2, character is not matched 
             else:
-              print("entered case 2, m, i, j, k,l", m, i, j, k, l)
-              T[m-1][i-1][j-1][k-1][l-1]= max(T[m][i-2][j-1][k-1][l-1], T[m-1][i-1][j-2][k-1][l-1], T[m-1][i-1][j-1][k-2][l-1])
+              print(f"entered case 2 - m: {m}, i: {i}, j: {j}, k: {k}, l: {l}")
+              T[m-1][i-1][j-1][k-1][l-1]= max(T[m-1][i-2][j-1][k-1][l-1], 
+                                              T[m-1][i-1][j-2][k-1][l-1], 
+                                              T[m-2][i-1][j-1][k-1][l-1])
                       
 
 print(LCS('aaa'))
