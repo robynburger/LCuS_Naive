@@ -1,6 +1,5 @@
 # Given a string s of length n, LCS(s) returns the length of the LCS 
 import numpy as np
-import math
 
 def LCS(s):
   n = len(s)
