@@ -2,15 +2,17 @@ import numpy as np
 
 # Given a string s of length n, LCS(s) returns the length of the LCS 
 def LCS(s):
+  # fil = ('prelim_results.txt', 'a')
+  # f.write(s)
   n = len(s)
   T = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)
-  T = f(T, s)
-
+  f(T, s)
+  # f.write(f"j = {5}")
+  # f.write(f"l = {10}")
   for m in range(1, n+1):
     F = gen_F(T, 5, 10, m) 
-    print(F) 
-    print()
-  return find_pq(T, len(s))
+    F.tofile('prelim_results.txt', sep='', format='%s')  
+    return find_pq(T, len(s))
 
 # find_pq(T, n) returns a list of tuples (p,q) such that T[m][p][p+1][q][q+1] is
 # maximized
@@ -42,8 +44,6 @@ def f(T, s):
               T[m][i][j][k][l]= max(T[m][i-1][j][k][l], 
                                     T[m][i][j][k-1][l], 
                                     T[m-1][i][j][k][l])
-  return T
-
 # generates the f matrix for fixed values of m, j, l
 def gen_F(T, j, l, m):
   F = np.zeros((j, l), dtype=int)
