@@ -7,20 +7,7 @@ def LCS(s):
   f(T, s)
   return np.max(T)
 
-# Given a table T, m(T) returns the maximum entry of T
-# def m(T,n):
-#   max = 0
-#   for m in range(0, n+1):
-#     for i in range(0, n+1):
-#       for j in range (0, n+1):
-#         for k in range (0, n+1):
-#           for l in range (0, n+1):
-#             if T[m][i][j][k][l]> max:
-#               max =  T[m][i][j][k][l]
-#   return max
-
 # LOOP OVER P, Q in T and find those that are the max
-
 def f(T, s):
   n = len(s)
   for m in range(1, n+1):
