@@ -5,6 +5,11 @@ def LCS(s):
   n = len(s)
   T = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)
   T = f(T, s)
+
+  for m in range(1, n+1):
+    F = gen_F(T, 5, 10, m) 
+    print(F) 
+    print()
   return find_pq(T, len(s))
 
 # find_pq(T, n) returns a list of tuples (p,q) such that T[m][p][p+1][q][q+1] is
@@ -34,15 +39,18 @@ def f(T, s):
             if s[i-1] == s[k-1] == s[m-1]: 
               T[m][i][j][k][l] = T[m-1][i-1][j][k-1][l] + 1 
             else:
-                T[m][i][j][k][l]= max( T[m][i-1][j][k][l], 
-                                              T[m][i][j][k-1][l], 
-                                              T[m-1][i][j][k][l])
+              T[m][i][j][k][l]= max(T[m][i-1][j][k][l], 
+                                    T[m][i][j][k-1][l], 
+                                    T[m-1][i][j][k][l])
   return T
 
+# generates the f matrix for fixed values of m, j, l
 def gen_F(T, j, l, m):
+  F = np.zeros((j, l), dtype=int)
   for i in range(1, j):
     for k in range (j, l):
-      print(T[m][i][j][k][l])
+      F[i, k] = T[m][i][j][k][l]
+  return F
   
 ans = LCS("aabcabbcfabc")
 print(ans)
