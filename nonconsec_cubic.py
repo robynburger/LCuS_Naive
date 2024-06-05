@@ -8,7 +8,7 @@ def LCS(s):
   T = f(T, s)
   return find_pq(T, len(s))
 
-# find_pq returns a list of tuples (p,q) such that T[m][p][p+1][q][q+1] is
+# find_pq(T, n) returns a list of tuples (p,q) such that T[m][p][p+1][q][q+1] is
 # maximized
 def find_pq(T, n):
   m = n
