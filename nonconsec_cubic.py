@@ -1,6 +1,6 @@
-# Given a string s of length n, LCS(s) returns the length of the LCS 
 import numpy as np
 
+# Given a string s of length n, LCS(s) returns the length of the LCS 
 def LCS(s):
   n = len(s)
   T = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)
