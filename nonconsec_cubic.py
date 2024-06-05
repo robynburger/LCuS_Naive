@@ -39,5 +39,10 @@ def f(T, s):
                                               T[m-1][i][j][k][l])
   return T
 
+def gen_F(T, j, l, m):
+  for i in range(1, j):
+    for k in range (j, l):
+      print(T[m][i][j][k][l])
+  
 ans = LCS("aabcabbcfabc")
 print(ans)
