@@ -6,11 +6,11 @@ def LCS(s):
   n = len(s)
   T = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)
   T = f(T, s)
-  return new_max(T, s)
+  return find_pq(T, len(s))
 
-# LOOP OVER P, Q in T and find those that are the max
-def new_max(T, s):
-  n = len(s)
+# find_pq returns a list of tuples (p,q) such that T[m][p][p+1][q][q+1] is
+# maximized
+def find_pq(T, n):
   m = n
   d = dict()
 
@@ -24,7 +24,7 @@ def new_max(T, s):
   max_f = max(d.keys())
   return d[max_f]
 
-# Populates values of tensor T 
+# f(T, s) modifies T[m][i][j][k][l] to be f_m(i, j, k, l) for all valid inputs
 def f(T, s):
   n = len(s)
   for m in range(1, n+1):
