@@ -1,7 +1,9 @@
 # Given a string s of length n, LCS(s) returns the length of the LCS 
+import numpy as np
+
 def LCS(s):
   n = len(s)
-  T = [[[[[0 for _ in range(n+1)] for _ in range(n+1)] for _ in range(n+1)] for _ in range(n+1)] for _ in range(n+1)]
+  T = np.zeros((n+1, n+1, n+1, n+1, n+1))
   f(T, s)
   return m(T,n)
 
@@ -28,11 +30,11 @@ def f(T, s):
                 # if i == 1 or k == 1 or m == 1:
                 #   T[m-1][i-1][j-1][k-1][l-1] = 1
                 # else:
-                  T[m][i][j][k][l] = T[m-1][i][j][k-1][l] + 1 
+                  T[m][i][j][k][l] = T[m-1][i-1][j][k-1][l] + 1 
             else:
               # if i > 1 and j > 1 and m > 1:
                 T[m][i][j][k][l]= max(T[m][i-1][j][k][l], 
-                                              T[m][i][j-1][k][l], 
+                                              T[m][i][j][k-1][l], 
                                               T[m-1][i][j][k][l])
               # elif j > 1 and m >1: 
               #   T[m-1][i-1][j-1][k-1][l-1] = max(T[m-1][i-1][j-2][k-1][l-1], 
@@ -52,4 +54,4 @@ def f(T, s):
               # else: 
               #   T[m-1][i-1][j-1][k-1][l-1] = 0
                       
-print(LCS('aabbavaaa'))
+print(LCS("aabcabbcfabc"))
