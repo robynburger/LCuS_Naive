@@ -19,6 +19,8 @@ def LCS(s):
 #               max =  T[m][i][j][k][l]
 #   return max
 
+# LOOP OVER P, Q in T and find those that are the max
+
 def f(T, s):
   n = len(s)
   for m in range(1, n+1):
