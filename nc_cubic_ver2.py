@@ -1,26 +1,28 @@
-# Three Case
+# Three Case - algorithm which computes the length of the LCS (Longest Cubic Subsequence) 
+
 import numpy as np
 
-whole_seq = "abbbcfafafbfcabc"  # longest seq is 2 - ab
+whole_seq = "aabfafebab"
 
+# initializes T array (5-d multidimensional array)
 def helper(seq):
     n = len(seq)
     # T is 0...n-1 for each set of indices
     T = np.array([[[[[0 for a in range(n)] for b in range(n)] for c in range(n)] for d in range(n)] for e in range(n)])
-    # populates T
+    # f populates values of T
     T = f(seq, T)
-    #print(T)
-    print(T.max())
+    return T
 
 # populates T table
 def f(seq, T):
     n = len(seq)
-    # seq is 0...n-1  --> with n indices
+    # seq is 0...n-1 with length n
     for m in range(n):     # 0...n-1
         for i in range(m+1):     # 0...m
-            for j in range(i+1, m+1):      # i+1...m
+            for j in range(i+1, m+1):    # i+1...m
                 for k in range(j, m+1):         # j...m
                     for l in range(k+1, m+1):       # k+1...m
+                        # verify that potential indices are not -1
                         a, b, c = i-1, k-1, m-1
                         if seq[i] == seq[k] == seq[m]:        # 0...n-1      
                             if a == -1 or b == -1 or c == -1:
@@ -53,7 +55,23 @@ def f(seq, T):
                                                        T[m-1, i, j, k, l])
     return T
 
-helper(whole_seq)
+def poss_indices(seq):
+    T = helper(seq)
+    target = T.max()
+    n = len(seq)
+    list_indices = []
+    for m in range(n):     # 0...n-1
+        for i in range(m+1):     # 0...m
+            for j in range(i+1, m+1):    # i+1...m
+                for k in range(j, m+1):         # j...m
+                    for l in range(k+1, m+1):
+                        if T[n-1, i, j, k, l] == target:
+                            list_indices.append((i, j, k, l))
+    return list_indices
+
+
+l = poss_indices(whole_seq)
+print(l)
 
 """
 n = 6
