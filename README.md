@@ -22,16 +22,29 @@ For more information, see paper (* citation)
 
 ## Running LCS
 
-Clone the repository:
-```$ git clone https://github.com/robynburger/LCS_naieve```
+Clone the repository: 
+```
+$ git clone https://github.com/robynburger/LCS_naieve
+```
 
-Run LCS.py
-```$ python LCS.py```
+Run LCS.py:
+```
+$ python LCS.py
+```
 
 Enter command line arguments:
--- Enter a string:
--- Ideal parameters (Yes/No):
--- 
+```
+Enter a string:
+Ideal parameters (Yes/No):
+```
+If 'No', user will be prompted to enter j, l, and m parameters. 
+```
+Enter j, l, m parameters.
+n = {length of string entered}. Note: 1 <= i < j <= k < l <= m <= n.
+j:
+l:
+m:
+```
 
 Results for string 's' stored in ...results\s
 
