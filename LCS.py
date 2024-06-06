@@ -112,6 +112,20 @@ def LCS(s, ideal, j, l, m):
   file.close()
   print(f"\nYour file was saved: {file_name}\n")
 
+# prompts user for an integer in the range (lower, upper) with exclusive bounds
+def check_input(str_x, lower, upper):
+  validInput = False
+  while not validInput:
+    try:
+      x = int(input(f"{str_x}: "))
+      if x > lower and x < upper:
+        validInput = True
+      else:
+        print("Enter an integer in the proper range.")
+    except ValueError:
+      print("Enter a positive integer.")
+  return x
+
   
 s = input("\nEnter string: ")
 
@@ -120,10 +134,11 @@ ideal = True if input("\nUse ideal parameters? (Yes/No): ").lower() == 'yes' els
 # Case 1: user selects parameters. s
 if not ideal:
   print(f"\nEnter positive integers j, l, m. Note: 1 <= i < j <= k < l <= m <= {len(s)}.")
+  
+  j = check_input("j", 1, len(s))
+  l = check_input("l", j, len(s) + 1)
+  m = check_input("m", l-1, len(s) + 1)
 
-  j = int(input("j: "))
-  l = int(input("l: "))
-  m = int(input("m: "))
   # def check_j(j):
   #   if (not j.isdigit()):
   #     a = input("Please enter a positive integer j = ")
