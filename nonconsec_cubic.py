@@ -10,8 +10,8 @@ def LCS(s):
   # f.write(f"j = {5}")
   # f.write(f"l = {10}")
   for m in range(1, n+1):
-    F = gen_F(T, 5, 10, m) 
-    F.tofile('prelim_results.txt', sep='', format='%s')  
+    #F = gen_F(T, 5, 10, m) 
+    #F.tofile('prelim_results.txt', sep='', format='%s')  
     return find_pq(T, len(s))
 
 # find_pq(T, n) returns a list of tuples (p,q) such that T[m][p][p+1][q][q+1] is
