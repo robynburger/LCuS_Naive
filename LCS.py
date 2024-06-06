@@ -32,7 +32,7 @@ def populate_T(T, s):
                                     T[m][i][j][k-1][l], 
                                     T[m-1][i][j][k][l])
   return T
-# generates the f matrix for fixed values of m, j, l
+# gen_F(T, j, l, m) generates the f matrix for fixed values of m, j, l
 # Note: leftmost column and top row correspond to i= 0 and k=0, respectively 
 # so the leftmost column and top row will always be 0s
 def gen_F(T, j, l, m):
@@ -42,7 +42,7 @@ def gen_F(T, j, l, m):
       F[i, k] = T[m][i][j][k][l]
   return F
 
-# gen_D generates the D matrix for the fixed jalues of m, j, l
+# gen_D(T, j, l, m) generates the D matrix for the fixed jalues of m, j, l
 # Note: leftmost column and top row correspond to i= 0 and k=0, respectively 
 # so the leftmost column and top row will always be 0s
 def gen_D(T, j, l, m):
@@ -64,7 +64,7 @@ def gen_E(T, j, l, m):
       E[i, k] = F[i, k] - F[i, k-1]
   return E 
 
-# Given a string s of length n, LCS(s) creates a file that contains s, p, q, F, D, and E
+# LCS a string s of length n, LCS(s) writes parameters and F, D, E matrices to a file
 def LCS(s, ideal, j, l, m):
   n = len(s)
   t = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)
