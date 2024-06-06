@@ -89,7 +89,8 @@ def LCS(s, ideal, j, l, m):
     ind = "ideal"
 
   # writes results to a file
-  file = open(f"results/{s}_{ind}.txt", "w")
+  file_name = str(f"results/ideal_{s}.txt") if ideal else str(f"results/{j}{l}{m}_{s}.txt")
+  file = open(file_name, "w")
   file.write(f"s = {s}\n\n")
   file.write(f"i is in range [1, {j})\n")
   file.write(f"j = {j}\n")
@@ -104,23 +105,66 @@ def LCS(s, ideal, j, l, m):
   file.write('===== E =====\n')
   file.write(str(E))
   file.close()
-  
-s = input("Enter a string: ")
-ideal_input = input("Ideal parameters (Yes/No): ")
-ideal_bool = True
-if ideal_input == "No":
-  ideal_bool = False
+  print(f"Your file was saved: {file_name}")
 
-# user selects params
-if not ideal_bool:
-  print("Enter j, l, m parameters.")
-  print(f"n = {len(s)}. Note: 1 <= i < j <= k < l <= m <= n.")
+  
+s = input("\nEnter a string: ")
+
+ideal = True if input("\nDo you want to use ideal parameters? (Yes/No): ").lower() == 'yes' else False
+
+# Case 1: user selects parameters. s
+if not ideal:
+  print(f"\nNow you will enter your j, l, m parameters. Note: 1 <= i < j <= k < l <= m <= {len(s)}.")
+
   j = int(input("j: "))
   l = int(input("l: "))
   m = int(input("m: "))
-# user wants ideal params, set to 0 initially - will be redefined in func
+  # def check_j(j):
+  #   if (not j.isdigit()):
+  #     a = input("Please enter a positive integer j = ")
+  #     j = check_j(f"{a}")
+  #   j = int(j)
+  #   if (not (1 < j < len(s))):
+  #     j = check_j(input(f"Please ensure 1 < j < {len(s)}. j = "))
+  #   else:
+  #     return j
+    
+  # j_input = input("j = ")
+  # j = check_j(j_input)
+
+
+  # def check_l(l):
+  #   if (not l.isdigit()):
+  #     a = input("Please enter a positive integer l = ")
+  #     l = check_l(f"{a}")
+  #   l = int(l)
+  #   if (not (j < l <= len(s))):
+  #     l = check_l(input(f"Please ensure {j} < l <= {len(s)}. l = "))
+  #   else:
+  #     return j
+    
+  # l_input = input("l = ")
+  # l = check_l(l_input)
+
+
+  # def check_m(m):
+  #   if (not m.isdigit()):
+  #     a = input("Please enter a positive integer m = ")
+  #     m = check_m(f"{a}")
+  #   m = int(m)
+  #   if (not (1 < m < len(s))):
+  #     m = check_m(input(f"Please ensure {l} <= m <= {len(s)}. m = "))
+  #   else:
+  #     return m
+    
+  # m_input = input("m = ")
+  # m = check_m(m_input)
+
+  
+# Case 2: uses ideal parameters. Initially set to 0, but updated in LCS. 
 else:
   j, l, m = 0, 0, 0
 
-LCS(s, ideal_bool, j, l, m)
+
+LCS(s, ideal, j, l, m)
 
