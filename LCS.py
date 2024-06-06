@@ -121,7 +121,7 @@ def check_input(str_x, lower, upper):
       if x > lower and x < upper:
         validInput = True
       else:
-        print("Enter an integer in the proper range.")
+        print(F"Enter an integer in the proper range: {lower} < {str_x} < {upper}.")
     except ValueError:
       print("Enter a positive integer.")
   return x
@@ -138,8 +138,7 @@ if not ideal:
   j = check_input("j", 1, len(s))
   l = check_input("l", j, len(s) + 1)
   m = check_input("m", l-1, len(s) + 1)
-  
-# Case 2: uses ideal parameters. Initially set to 0, but updated in LCS. 
+
 else:
   j, l, m = 0, 0, 0
 
