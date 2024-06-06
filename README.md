@@ -70,4 +70,3 @@ Adapated from longest tandem subsequence problem:
 Kosowski, Adrian., An Efficient Algorithm for the Longest Tandem
 Scattered Subsequence Problem,  Lecture Notes in Computer Science, volume 3246 
 (2004) 93-100.
-
