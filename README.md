@@ -1,6 +1,6 @@
-## nonconsec_cubic
+## Description of LCS
 
-For a string of characters, nonconsec_cubic identifies the longest subsequence 
+LCS, or longest consecutive subsequence, aims toFor a string of characters, nonconsec_cubic identifies the longest subsequence 
 repeated three times. It finds the optimal breakpoints to seperate the string 
 into three consecutive substrings, each containing the subsequence. It then 
 returns these indices and three matrices, F, D, and E. 
@@ -12,10 +12,11 @@ Use Conda or other similar environment to run NumPy package:
 
 Requires python 3.12 or higher. 
 
-## Usage
+## Running LCS
 
-python3 nonconsec_cubic.py
+$ python nonconsec_cubic.py
 
-Command line arguments: 
+-- Enter a string:
 
-
+-- Ideal params (True/False):
+-- 
