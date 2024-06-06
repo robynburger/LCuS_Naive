@@ -113,9 +113,9 @@ def LCS(s, ideal, j, l, m):
   print(f"\nYour file was saved: {file_name}\n")
 
   
-s = input("\nEnter a string: ")
+s = input("\nEnter string: ")
 
-ideal = True if input("\nDo you want to use ideal parameters? (Yes/No): ").lower() == 'yes' else False
+ideal = True if input("\nUse ideal parameters? (Yes/No): ").lower() == 'yes' else False
 
 # Case 1: user selects parameters. s
 if not ideal:

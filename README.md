@@ -34,8 +34,9 @@ $ python LCS.py
 
 Enter command line arguments:
 ```
-Enter a string:
-Ideal parameters (Yes/No):
+Enter string:
+
+Use ideal parameters? (Yes/No):
 ```
 If user types 'Yes:
 ``` 
@@ -43,11 +44,16 @@ Your file was saved: results/s/ideal.txt
 ```
 If user types 'No':
 ```
-Enter positive integers j, l, m.
+Enter positive integers j, l, m:
+
 Note: 1 <= i < j <= k < l <= m <= {len(s)}.
+
 j:
+
 l:
+
 m:
+
 Your file was saved: results/s/j_l_m.txt
 ```
 
