@@ -75,7 +75,7 @@ def LCS(s, ideal, j, l, m):
   # select parameters
   if ideal:
     j, l, m = p+1, q+1, n
-  # takes inputted params (function arguments) otherwise
+  # otherwise takes inputted params (function arguments)2
 
   params = (T, j, l, m)
 
@@ -89,7 +89,7 @@ def LCS(s, ideal, j, l, m):
     ind = "ideal"
 
   # writes results to a file
-  file_name = str(f"results/ideal_{s}.txt") if ideal else str(f"results/{j}{l}{m}_{s}.txt")
+  file_name = str(f"results/{s}_ideal.txt") if ideal else str(f"results/{s}_{j}_{l}_{m}.txt")
   file = open(file_name, "w")
   file.write(f"s = {s}\n\n")
   file.write(f"i is in range [1, {j})\n")
@@ -98,14 +98,17 @@ def LCS(s, ideal, j, l, m):
   file.write(f"l = {l}\n")
   file.write(f"m = {m}\n")
   file.write(f"substrings: {s[0:j-1]}, {s[j-1:l-1]}, {s[l-1:m]}\n\n")
-  file.write('===== F =====\n')
+  if ideal:
+    file.write(f"Values of p and q that maximize T[n][p][p+1][q][q+1]:\n\tp = {j-1}, q = {l-1}\n\n")
+  eq_signs = l * "="
+  file.write(f"{eq_signs} F {eq_signs}\n")
   file.write(str(F) + '\n\n')
-  file.write('===== D ===== \n')
+  file.write(f"{eq_signs} D {eq_signs}\n")
   file.write(str(D) + '\n\n')
-  file.write('===== E =====\n')
+  file.write(f"{eq_signs} E {eq_signs}\n")
   file.write(str(E))
   file.close()
-  print(f"Your file was saved: {file_name}")
+  print(f"\nYour file was saved: {file_name}\n")
 
   
 s = input("\nEnter a string: ")
@@ -114,7 +117,7 @@ ideal = True if input("\nDo you want to use ideal parameters? (Yes/No): ").lower
 
 # Case 1: user selects parameters. s
 if not ideal:
-  print(f"\nNow you will enter your j, l, m parameters. Note: 1 <= i < j <= k < l <= m <= {len(s)}.")
+  print(f"\nEnter j, l, m parameters. Note: 1 <= i < j <= k < l <= m <= {len(s)}.")
 
   j = int(input("j: "))
   l = int(input("l: "))
