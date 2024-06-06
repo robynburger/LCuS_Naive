@@ -90,25 +90,30 @@ def LCS(s, ideal, j, l, m):
 
   # writes results to a file
   file = open(f"results/{s}_{ind}.txt", "w")
-  file.write(f"s = {s}\n \n")
+  file.write(f"s = {s}\n\n")
   file.write(f"i is in range [1, {j})\n")
   file.write(f"j = {j}\n")
   file.write(f"k is in range [{j}, {l})\n")
   file.write(f"l = {l}\n")
   file.write(f"m = {m}\n")
+  file.write(f"substrings: {s[0:j-1]}, {s[j-1:l-1]}, {s[l-1:m]}\n\n")
   file.write('===== F =====\n')
-  file.write(str(F) + '\n \n')
+  file.write(str(F) + '\n\n')
   file.write('===== D ===== \n')
-  file.write(str(D) + '\n \n')
+  file.write(str(D) + '\n\n')
   file.write('===== E =====\n')
   file.write(str(E))
   file.close()
   
 s = input("Enter a string: ")
-ideal_bool = bool(int(input("Ideal parameters? \nEnter 1 for True/ 0 for False): ")))
+ideal_input = input("Ideal parameters (Yes/No): ")
+ideal_bool = True
+if ideal_input == "No":
+  ideal_bool = False
+
 # user selects params
 if not ideal_bool:
-  print("Choose j, l, m parameters")
+  print("Enter j, l, m parameters.")
   print(f"n = {len(s)}. Note: 1 <= i < j <= k < l <= m <= n.")
   j = int(input("j: "))
   l = int(input("l: "))
