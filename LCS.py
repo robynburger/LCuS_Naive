@@ -105,14 +105,14 @@ def LCS(s, ideal, j, l, m):
   file.close()
   
 s = input("Enter a string: ")
-ideal_bool = bool(int(input("Ideal parameters? \n(1 for True/ 0 for False): ")))
+ideal_bool = bool(int(input("Ideal parameters? \nEnter 1 for True/ 0 for False): ")))
 # user selects params
 if not ideal_bool:
   print("Choose j, l, m parameters")
   print(f"n = {len(s)}. Note: 1 <= i < j <= k < l <= m <= n.")
-  j = input("j: ")
-  l = input("l: ")
-  m = input("m: ")
+  j = int(input("j: "))
+  l = int(input("l: "))
+  m = int(input("m: "))
 # user wants ideal params, set to 0 initially - will be redefined in func
 else:
   j, l, m = 0, 0, 0
