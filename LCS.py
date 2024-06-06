@@ -138,48 +138,6 @@ if not ideal:
   j = check_input("j", 1, len(s))
   l = check_input("l", j, len(s) + 1)
   m = check_input("m", l-1, len(s) + 1)
-
-  # def check_j(j):
-  #   if (not j.isdigit()):
-  #     a = input("Please enter a positive integer j = ")
-  #     j = check_j(f"{a}")
-  #   j = int(j)
-  #   if (not (1 < j < len(s))):
-  #     j = check_j(input(f"Please ensure 1 < j < {len(s)}. j = "))
-  #   else:
-  #     return j
-    
-  # j_input = input("j = ")
-  # j = check_j(j_input)
-
-
-  # def check_l(l):
-  #   if (not l.isdigit()):
-  #     a = input("Please enter a positive integer l = ")
-  #     l = check_l(f"{a}")
-  #   l = int(l)
-  #   if (not (j < l <= len(s))):
-  #     l = check_l(input(f"Please ensure {j} < l <= {len(s)}. l = "))
-  #   else:
-  #     return j
-    
-  # l_input = input("l = ")
-  # l = check_l(l_input)
-
-
-  # def check_m(m):
-  #   if (not m.isdigit()):
-  #     a = input("Please enter a positive integer m = ")
-  #     m = check_m(f"{a}")
-  #   m = int(m)
-  #   if (not (1 < m < len(s))):
-  #     m = check_m(input(f"Please ensure {l} <= m <= {len(s)}. m = "))
-  #   else:
-  #     return m
-    
-  # m_input = input("m = ")
-  # m = check_m(m_input)
-
   
 # Case 2: uses ideal parameters. Initially set to 0, but updated in LCS. 
 else:
