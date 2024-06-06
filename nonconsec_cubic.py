@@ -83,8 +83,13 @@ def LCS(s, ideal, j, l, m):
   D = gen_D(*params)
   E = gen_E(*params)
 
+  # indicate ideal or not in name of the test file
+  ind = "not_ideal"
+  if ideal:
+    ind = "ideal"
+
   # writes results to a file
-  file = open(f"results/{s}.txt", "w")
+  file = open(f"results/{s}_{ind}.txt", "w")
   file.write(f"s = {s}\n \n")
   file.write(f"i is in range [1, {j})\n")
   file.write(f"j = {j}\n")
@@ -100,7 +105,7 @@ def LCS(s, ideal, j, l, m):
   file.close()
   
 s = input("Enter a string: ")
-ideal_bool = bool(input("Ideal params (True/False): "))
+ideal_bool = bool(int(input("Ideal parameters? \n(1 for True/ 0 for False): ")))
 # user selects params
 if not ideal_bool:
   print("Choose j, l, m parameters")
