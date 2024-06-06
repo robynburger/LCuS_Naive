@@ -100,7 +100,7 @@ def LCS(s, ideal, j, l, m):
   D = gen_D(*params)
   E = gen_E(*params)
 
-  # write to a file named after j, l, m params and stored in a folder named after the string
+  # write to file named after j, l, m params and stored in folder named after string
   file_name = str(f"results/{s}/ideal.txt") if ideal else str(f"results/{s}/{j}_{l}_{m}.txt")
   # folder is named after the string
   os.makedirs(os.path.dirname(file_name), exist_ok=True)
@@ -147,9 +147,9 @@ def check_input(str_x, lower, upper):
       print("Enter a positive integer.")
   return x
 
-##########################################################################################
+############################################################################################
 # Interactive portion of the program
-##########################################################################################
+############################################################################################
 s = input("\nEnter string: ")
 ideal = True if input("\nUse ideal parameters? (Yes/No): ").lower() == 'yes' else False
 
