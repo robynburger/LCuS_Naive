@@ -1,6 +1,6 @@
 ## Description of LCS
 
-LCS.py is a naieve O(n^5) approach to solving the longest cubic subsequence 
+LCS.py is a naive O(n^5) approach to solving the longest cubic subsequence 
 (LCS) problem. 
 
 For a string of characters, LCS.py identifies the longest subsequence repeated 
@@ -23,15 +23,15 @@ For more information, see paper (* citation)
 ## Running LCS
 
 Clone the repository:
-$ git clone https://github.com/robynburger/LCS_naieve
+```$ git clone https://github.com/robynburger/LCS_naieve```
 
 Run LCS.py
-$ python LCS.py
+```$ python LCS.py```
 
 Enter command line arguments:
 -- Enter a string:
--- Ideal params (True/False):
---
+-- Ideal parameters (Yes/No):
+-- 
 
 Results for string 's' stored in ...results\s
 
