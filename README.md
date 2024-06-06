@@ -37,20 +37,20 @@ Enter command line arguments:
 Enter a string:
 Ideal parameters (Yes/No):
 ```
-If 'No', user will be prompted to enter j, l, and m parameters. 
+If user types 'Yes:
+``` 
+Your file was saved: results/s/ideal.txt
 ```
-Enter j, l, m parameters.
+If user types 'No':
+```
+Enter positive integers j, l, m.
 n = {length of string entered}. Note: 1 <= i < j <= k < l <= m <= n.
 j:
 l:
 m:
+Your file was saved: results/s/j_l_m.txt
 ```
 
-Results for string 's' stored in ...results\s
-
-If ideal, stored as 
-
-If not ideal stored as ...
 ## Authors and Acknowledgements 
 
 Written by Robyn Burger and Allison Shi under the mentorship of 

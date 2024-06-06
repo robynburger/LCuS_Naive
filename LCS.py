@@ -119,7 +119,7 @@ ideal = True if input("\nDo you want to use ideal parameters? (Yes/No): ").lower
 
 # Case 1: user selects parameters. s
 if not ideal:
-  print(f"\nEnter j, l, m parameters. Note: 1 <= i < j <= k < l <= m <= {len(s)}.")
+  print(f"\nEnter positive integers j, l, m. Note: 1 <= i < j <= k < l <= m <= {len(s)}.")
 
   j = int(input("j: "))
   l = int(input("l: "))
