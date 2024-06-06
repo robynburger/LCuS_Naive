@@ -1,3 +1,4 @@
+import os
 import numpy as np
 
 # find_pq(T, n) returns a list of tuples (p,q) such that T[m][p][p+1][q][q+1] is
@@ -89,7 +90,8 @@ def LCS(s, ideal, j, l, m):
     ind = "ideal"
 
   # writes results to a file
-  file_name = str(f"results/{s}_ideal.txt") if ideal else str(f"results/{s}_{j}_{l}_{m}.txt")
+  file_name = str(f"results/{s}/ideal.txt") if ideal else str(f"results/{s}/{j}_{l}_{m}.txt")
+  os.makedirs(os.path.dirname(file_name), exist_ok=True)
   file = open(file_name, "w")
   file.write(f"s = {s}\n\n")
   file.write(f"i is in range [1, {j})\n")
