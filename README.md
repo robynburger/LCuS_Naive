@@ -44,7 +44,7 @@ Your file was saved: results/s/ideal.txt
 If user types 'No':
 ```
 Enter positive integers j, l, m.
-n = {length of string entered}. Note: 1 <= i < j <= k < l <= m <= n.
+Note: 1 <= i < j <= k < l <= m <= {len(s)}.
 j:
 l:
 m:
