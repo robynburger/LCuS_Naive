@@ -1,5 +1,7 @@
 import numpy as np
 
+# find_pq(T, n) returns a list of tuples (p,q) such that T[m][p][p+1][q][q+1] is
+# maximized
 def find_pq(T, n):
   m = n
   d = dict()
@@ -61,44 +63,54 @@ def gen_E(T, j, l, m):
       E[i, k] = F[i, k] - F[i, k-1]
   return E 
 
-# Given a string s of length n, LCS(s) returns the length of the LCS 
-def LCS(s):
+# Given a string s of length n, LCS(s) creates a file that contains s, p, q, F, D, and E
+def LCS(s, ideal, j, l, m):
   n = len(s)
   t = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)
   T = populate_T(t, s)
+
+  # extracts the largest tuple from the list of tuples
   p, q = find_pq(T, n)[-1]
-  params = (T,p+1, q+1, n)
+
+  # select parameters
+  if ideal:
+    j, l, m = p+1, q+1, n
+  # takes inputted params (function arguments) otherwise
+
+  params = (T, j, l, m)
+
   F = gen_F(*params) 
   D = gen_D(*params)
   E = gen_E(*params)
 
-  file = open(f"{s}.txt", "w")
+  # writes results to a file
+  file = open(f"results/{s}.txt", "w")
   file.write(f"s = {s}\n \n")
-  file.write(f"p = {p}\n \n")
-  file.write(f"q = {q}\n \n")
-  file.write('==== F =====\n')
+  file.write(f"i is in range [1, {j})\n")
+  file.write(f"j = {j}\n")
+  file.write(f"k is in range [{j}, {l})\n")
+  file.write(f"l = {l}\n")
+  file.write(f"m = {m}\n")
+  file.write('===== F =====\n')
   file.write(str(F) + '\n \n')
-  file.write('==== D ===== \n')
+  file.write('===== D ===== \n')
   file.write(str(D) + '\n \n')
-  file.write('==== E =====\n')
+  file.write('===== E =====\n')
   file.write(str(E))
   file.close()
-  # f.write(f"j = {5}")
-  # f.write(f"l = {10}")
-  # print(gen_D(T, 4, 6, n))
-  # for m in range(1, n+1):
-  #   #F.tofile('prelim_results.txt', sep='', format='%s')  
-  #   return find_pq(T, len(s))
-  # print('F')
-  # print(F)
-  # print('D')
-  # print(D)
-  # print('E')
-  # print(E)
-
-# find_pq(T, n) returns a list of tuples (p,q) such that T[m][p][p+1][q][q+1] is
-# maximized
-
   
-LCS("abcabab")
-# print(ans)
+s = input("Enter a string: ")
+ideal_bool = bool(input("Ideal params (True/False): "))
+# user selects params
+if not ideal_bool:
+  print("Choose j, l, m parameters")
+  print(f"n = {len(s)}. Note: 1 <= i < j <= k < l <= m <= n.")
+  j = input("j: ")
+  l = input("l: ")
+  m = input("m: ")
+# user wants ideal params, set to 0 initially - will be redefined in func
+else:
+  j, l, m = 0, 0, 0
+
+LCS(s, ideal_bool, j, l, m)
+
