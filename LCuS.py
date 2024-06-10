@@ -81,7 +81,7 @@ def gen_E(T, j, l, m):
 # a folder named after the given string and which has a file name consisting of 
 # the j, l, m parameters. 
 '''
-def LCS(s, ideal, j, l, m):
+def LCuS(s, ideal, j, l, m):
   n = len(s)
   empty_T = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)
   # populate values of tensor T
@@ -165,4 +165,4 @@ else:
   j, l, m = 0, 0, 0
 
 # write parameters and matrices to a text file
-LCS(s, ideal, j, l, m)
+LCuS(s, ideal, j, l, m)
