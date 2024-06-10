@@ -1,4 +1,4 @@
-## Description of LCS
+## Description of LCuS
 
 LCuS.py is a naive O(n^5) approach to solving the longest cubic subsequence 
 (LCuS) problem. 
@@ -20,7 +20,7 @@ For more information, see paper (* citation)
 2. Use Conda or other similar environment to run NumPy package:
 (https://www.numpy.org)
 
-## Running LCS
+## Running LCuS
 
 Clone the repository: 
 ```
