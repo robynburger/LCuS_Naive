@@ -1,9 +1,9 @@
 ## Description of LCS
 
-LCS.py is a naive O(n^5) approach to solving the longest cubic subsequence 
-(LCS) problem. 
+LCuS.py is a naive O(n^5) approach to solving the longest cubic subsequence 
+(LCuS) problem. 
 
-For a string of characters, LCS.py identifies the longest subsequence repeated 
+For a string of characters, LCuS.py identifies the longest subsequence repeated 
 three distinct times. It finds the optimal breakpoints to seperate the string 
 into three consecutive substrings, each containing an interation of the 
 subsequence. It then returns these indices and three matrices, F, D, and E. 
@@ -27,9 +27,9 @@ Clone the repository:
 $ git clone https://github.com/robynburger/LCS_naieve
 ```
 
-Run LCS.py:
+Run LCuS.py:
 ```
-$ python LCS.py
+$ python LCuS.py
 ```
 
 Enter command line arguments:
