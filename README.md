@@ -6,11 +6,11 @@ LCuS.py is a naive O(n^5) approach to solving the longest cubic subsequence
 For a string of characters, LCuS.py identifies the longest subsequence repeated 
 three distinct times. It finds the optimal breakpoints to seperate the string 
 into three consecutive substrings, each containing an interation of the 
-subsequence. It then returns these indices and three matrices, F, D, and E. 
+subsequence. It then returns these indices and three matrices, F, D, and E. For given (valid) values of j, l, m, for all i in the range (1,...,j-1) and all k in the range (j,...,l-1):
 
-* Description of F
-* Description of D
-* Description of E
+* the F matrix holds values all f(i, k) 
+* the D matrix holds values all d(i, k)
+* the E matrix holds values all e(i, k)
 
 For more information, see paper (* citation)
 
