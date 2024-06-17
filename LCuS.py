@@ -150,6 +150,7 @@ def check_input(str_x, lower, upper):
 ############################################################################################
 # Interactive portion of the program
 ############################################################################################
+
 s = input("\nEnter string: ")
 ideal = True if input("\nUse ideal parameters? (Yes/No): ").lower() == 'yes' else False
 
