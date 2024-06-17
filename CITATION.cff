@@ -5,6 +5,6 @@ authors:
   given-names: "Robyn"
 - family-names: "Shi"
   given-names: "Allison"
-title: "Longest Cubic Subsequence problem"
+title: "Longest Cubic Subsequence Problem"
 version: 2.0.4
 url: "https://github.com/robynburger/LCS_Naive"
