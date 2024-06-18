@@ -69,6 +69,17 @@ def gen_D(T, j, m):
     D_list.append(D)
   return D_list
 
+
+'''
+# Generates a_m^j(i,k), which is the max l such that d_m^j(i, k, l) = 1
+'''
+# def gen_a(D_list, i, k, l):
+#   max_l = -1
+#   for x in len(D_list):
+#     if D_list[x][i, k] == 1:
+#       max_l = (x+1)
+#   return max_l
+  
 '''
 # Writes given parameters and f, d, e matrices to a text file which is stored in 
 # a folder named after the given string and which has a file name consisting of 
@@ -91,6 +102,22 @@ def LCuS(s, ideal, j, m):
   params = (T, j, m)
   F = gen_F(*params) 
   D = gen_D(*params)
+  
+  A_list = []
+  A = np.zeros((i, k), dtype=int) # aaaaaa 
+
+  for i in range(1, j):
+      print(f"i = {i}")
+      for k in range(j, m):
+        print(f"k = {k}")
+        for l in range(len(D)):
+          if(k < l):
+            if D[l][i, k] == 1:
+              print("yay!")
+              A[i, k] = l
+            
+
+
   # E = gen_E(*params)
 
   # write to file named after j, l, m params and stored in folder named after string
@@ -115,11 +142,14 @@ def LCuS(s, ideal, j, m):
   # format and print the f, d  matrices (for specified j, l, m values)
   eq_signs = (m+2) * "="
   file.write(f"{eq_signs} F, D {eq_signs}\n")
+  
   for x in range(len(F)):
     dashes = (m+2) * "-"
     file.write(f"\n{dashes} l = {x+2} {dashes}\n")
     file.write(str(F[x]) + '\n\n' + str(D[x])+ '\n\n')
-
+  
+  # for x in A_list:
+  file.write("A_list:" + str(A_list))
   file.close()
   
   # inform the user of the name of their file
@@ -152,7 +182,7 @@ ideal = True if input("\nUse ideal j? (Yes/No): ").lower() == 'yes' else False
 # case where user wants to select j, l, m parameters
   # ensure that valid inputs are entered for j, l, m
 if not ideal:
-  print(f"\nEnter positive integers 2 <=j < m <= {len(s)}.")
+  print(f"\nEnter positive integers 2 <= j < m <= {len(s)}.")
   j = check_input("j", 1, len(s))
 else:
   j = 0
