@@ -1,0 +1,11 @@
+s = ababab
+
+i is in range [1, 2)
+j = 2
+k is in range [2, l)
+l is in range [2, 6)
+m = 6
+F
+[[0 0 0 0 0]
+ [0 0 0 1 1]] 
+
