@@ -74,7 +74,7 @@ def gen_D(T, j, m):
 # Generates a_m^j(i,k), which is the max l such that d_m^j(i, k, l) = 1
 '''
 def gen_A(D_list, j, m):
-  A = np.zeros((m+1, m+1), dtype=int) -1
+  A = np.zeros((m+1, m+1), dtype=int) + 100 # high value meant to never be min
   # for elem in D_list: # indices range from 0 to m-2 inclusive - D[0] is l = 2
   for i in range(1, j):
     for k in range(j, m):
@@ -131,7 +131,7 @@ def LCuS(s, ideal, j, m):
   # indicate the values of p and q if ideal parameters are requested
   file.write(f"\tp = {p}, q = {q}\n\n")
 
-  eq_signs = (m+2) * "="
+  eq_signs = (m+5) * "="
   file.write(f"{eq_signs} A {eq_signs}\n")
   file.write(str(A))
 
