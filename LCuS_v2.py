@@ -75,17 +75,18 @@ def gen_D(T, j, m):
 '''
 def gen_A(D_list, j, m):
   A = np.zeros((m+1, m+1), dtype=int) - 1
-  for elem in D_list: # indices range from 0 to m-2 inclusive
+  for elem in D_list: # indices range from 0 to m-2 inclusive - D[0] is l = 2
     print(elem)
+
 
   for i in range(1, j):
     for k in range(j, m):
       max_l = 0
-      for l in range(k+1, m-1):
-        print(f"i: {i}, k: {k}, l: {l}")
-        print(D_list[l][i, k])
-        if D_list[l][i, k] == 1:
-          max_l = l + 1
+      for x in range(k+1, m+1):
+        print(f"i: {i}, k: {k}, x: {x-2}")
+        print(D_list[x-2][i, k])
+        if D_list[x-2][i, k] == 1:
+          max_l = x
       A[i, k] = max_l
 
   return A
