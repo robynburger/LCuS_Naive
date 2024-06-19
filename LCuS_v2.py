@@ -78,7 +78,6 @@ def gen_A(D_list, j, m):
   for elem in D_list: # indices range from 0 to m-2 inclusive - D[0] is l = 2
     print(elem)
 
-
   for i in range(1, j):
     for k in range(j, m):
       max_l = 0
