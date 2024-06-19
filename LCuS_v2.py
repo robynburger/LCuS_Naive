@@ -75,19 +75,16 @@ def gen_D(T, j, m):
 '''
 def gen_A(D_list, j, m):
   A = np.zeros((m+1, m+1), dtype=int) - 1
-  for elem in D_list: # indices range from 0 to m-2 inclusive - D[0] is l = 2
-    print(elem)
-
+  # for elem in D_list: # indices range from 0 to m-2 inclusive - D[0] is l = 2
   for i in range(1, j):
     for k in range(j, m):
       max_l = 0
       for x in range(k+1, m+1):
-        print(f"i: {i}, k: {k}, x: {x-2}")
-        print(D_list[x-2][i, k])
+        # print(f"i: {i}, k: {k}, x: {x-2}")
+        # print(D_list[x-2][i, k])
         if D_list[x-2][i, k] == 1:
           max_l = x
       A[i, k] = max_l
-
   return A
   
 '''
@@ -112,28 +109,8 @@ def LCuS(s, ideal, j, m):
   params = (T, j, m)
   F = gen_F(*params) 
   D = gen_D(*params)
-
   A = gen_A(D, j, m)
-
-  # print(A)
-  
-  """
-  A_list = []
-  A = np.zeros((i, k), dtype=int) # aaaaaa 
-
-  for i in range(1, j):
-      print(f"i = {i}")
-      for k in range(j, m):
-        print(f"k = {k}")
-        for l in range(len(D)):
-          if(k < l):
-            if D[l][i, k] == 1:
-              print("yay!")
-              A[i, k] = l
-  """
-
-
-  # E = gen_E(*params)
+  print(A)
 
   # write to file named after j, l, m params and stored in folder named after string
   file_name = str(f"results_v2/{s}/{j}_{m}_ideal.txt") if ideal else str(f"results_v2/{s}/{j}_{m}.txt")
@@ -152,7 +129,7 @@ def LCuS(s, ideal, j, m):
   # file.write(f"substrings: {s[0:j-1]}, {s[j-1:l-1]}, {s[l-1:m]}\n\n")
   # indicate the values of p and q if ideal parameters are requested
  
-  file.write(f"\n\tp = {p}, q = {q}\n\n")
+  file.write(f"\tp = {p}, q = {q}\n\n")
 
   # format and print the f, d  matrices (for specified j, l, m values)
   eq_signs = (m+2) * "="
@@ -164,7 +141,7 @@ def LCuS(s, ideal, j, m):
     file.write(str(F[x]) + '\n\n' + str(D[x])+ '\n\n')
   
   # for x in A_list:
-  file.write("A:" + str(A))
+  file.write("A:\n" + str(A))
   file.close()
   
   # inform the user of the name of their file
