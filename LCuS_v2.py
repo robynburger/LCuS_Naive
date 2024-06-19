@@ -115,7 +115,7 @@ def LCuS(s, ideal, j, m):
 
   A = gen_A(D, j, m)
 
-  print(A)
+  # print(A)
   
   """
   A_list = []
