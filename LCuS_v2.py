@@ -64,7 +64,7 @@ def gen_D(T, j, m):
   for l in range(2, m+1):
     D = np.zeros((j, l), dtype=int)
     for i in range(1, j):
-      for k in range (j, l):
+      for k in range(j, l):
         D[i, k] = (F_list[l-2])[i, k] - (F_list[l-2])[i-1, k-1]
     D_list.append(D)
   return D_list
@@ -73,12 +73,22 @@ def gen_D(T, j, m):
 '''
 # Generates a_m^j(i,k), which is the max l such that d_m^j(i, k, l) = 1
 '''
-# def gen_a(D_list, i, k, l):
-#   max_l = -1
-#   for x in len(D_list):
-#     if D_list[x][i, k] == 1:
-#       max_l = (x+1)
-#   return max_l
+def gen_A(D_list, j, m):
+  A = np.zeros((m+1, m+1), dtype=int) - 1
+  for elem in D_list: # indices range from 0 to m-2 inclusive
+    print(elem)
+
+  for i in range(1, j):
+    for k in range(j, m):
+      max_l = 0
+      for l in range(k+1, m-1):
+        print(f"i: {i}, k: {k}, l: {l}")
+        print(D_list[l][i, k])
+        if D_list[l][i, k] == 1:
+          max_l = l + 1
+      A[i, k] = max_l
+
+  return A
   
 '''
 # Writes given parameters and f, d, e matrices to a text file which is stored in 
@@ -102,7 +112,12 @@ def LCuS(s, ideal, j, m):
   params = (T, j, m)
   F = gen_F(*params) 
   D = gen_D(*params)
+
+  A = gen_A(D, j, m)
+
+  print(A)
   
+  """
   A_list = []
   A = np.zeros((i, k), dtype=int) # aaaaaa 
 
@@ -115,7 +130,7 @@ def LCuS(s, ideal, j, m):
             if D[l][i, k] == 1:
               print("yay!")
               A[i, k] = l
-            
+  """
 
 
   # E = gen_E(*params)
@@ -149,7 +164,7 @@ def LCuS(s, ideal, j, m):
     file.write(str(F[x]) + '\n\n' + str(D[x])+ '\n\n')
   
   # for x in A_list:
-  file.write("A_list:" + str(A_list))
+  file.write("A:" + str(A))
   file.close()
   
   # inform the user of the name of their file
