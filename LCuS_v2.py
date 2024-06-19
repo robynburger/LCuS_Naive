@@ -180,8 +180,8 @@ if not ideal:
 else:
   j = 0
   # l = check_input("l", j, len(s) + 1)
-print(f"\nEnter positive integer 2 < m <= {len(s)}.")
-m = check_input("m", 1, len(s) + 1)
+print(f"\nEnter positive integer {j} < m <= {len(s)}.")
+m = check_input("m", j, len(s) + 1)
 # otherwise user wants to use ideal parameters
 
 
