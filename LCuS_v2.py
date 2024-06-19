@@ -74,7 +74,7 @@ def gen_D(T, j, m):
 # Generates a_m^j(i,k), which is the max l such that d_m^j(i, k, l) = 1
 '''
 def gen_A(D_list, j, m):
-  A = np.zeros((m+1, m+1), dtype=int) - 1
+  A = np.zeros((m+1, m+1), dtype=int) -1
   # for elem in D_list: # indices range from 0 to m-2 inclusive - D[0] is l = 2
   for i in range(1, j):
     for k in range(j, m):
@@ -110,10 +110,10 @@ def LCuS(s, ideal, j, m):
   F = gen_F(*params) 
   D = gen_D(*params)
   A = gen_A(D, j, m)
-  print(A)
+  # print(A)
 
   # write to file named after j, l, m params and stored in folder named after string
-  file_name = str(f"results_v2/{s}/{j}_{m}_ideal.txt") if ideal else str(f"results_v2/{s}/{j}_{m}.txt")
+  file_name = str(f"results_v2/{s}/{j}_{m}.txt")
   # folder is named after the string
   os.makedirs(os.path.dirname(file_name), exist_ok=True)
   file = open(file_name, "w")
@@ -125,23 +125,24 @@ def LCuS(s, ideal, j, m):
   file.write(f"i is in range [1, {j})\n")
   file.write(f"k is in range [{j}, l)\n")
   file.write(f"l is in range [2, {m})\n\n")
+
   # display the substrings that would result from the split from the j, l, m values
   # file.write(f"substrings: {s[0:j-1]}, {s[j-1:l-1]}, {s[l-1:m]}\n\n")
   # indicate the values of p and q if ideal parameters are requested
- 
   file.write(f"\tp = {p}, q = {q}\n\n")
 
-  # format and print the f, d  matrices (for specified j, l, m values)
   eq_signs = (m+2) * "="
-  file.write(f"{eq_signs} F, D {eq_signs}\n")
+  file.write(f"{eq_signs} A {eq_signs}\n")
+  file.write(str(A))
+
+  # format and print the f, d  matrices (for specified j, l, m values)
+  file.write(f"\n\n{eq_signs} F, D {eq_signs}\n")
   
   for x in range(len(F)):
     dashes = (m+2) * "-"
     file.write(f"\n{dashes} l = {x+2} {dashes}\n")
     file.write(str(F[x]) + '\n\n' + str(D[x])+ '\n\n')
   
-  # for x in A_list:
-  file.write("A:\n" + str(A))
   file.close()
   
   # inform the user of the name of their file
