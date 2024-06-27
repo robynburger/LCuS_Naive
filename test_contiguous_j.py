@@ -61,10 +61,10 @@ def gen_j_vector(seq, count):
                         else: 
                             last_one_index = x
                 # Check first one appears at j=i+1
-                    if np.any(j_vector) == 1 and first_one_index == i+1:
-                        print("First one value at j=i+1")
-                    elif np.any(j_vector) == 1:
-                        print(f"\t First one value at j={first_one_index}, but i+1={i+1}")
+                if np.any(j_vector) == 1 and first_one_index == i+1:
+                    pass # print("First one value at j=i+1")
+                elif np.any(j_vector) == 1:
+                    print(f"\t Error: first one value at j={first_one_index}, but i+1={i+1}")
                 for y in range(first_one_index, last_one_index +1):
                     if j_vector[y] != 1 and np.any(j_vector) == 1:
                         print(f"\t Test {count}: Fail {seq}")
