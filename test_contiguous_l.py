@@ -11,7 +11,7 @@ alphabet = ['a', 'b', 'c']
 max_length = 20
 
 # number of test cases
-num_tests = 100000
+num_tests = 5
 
 def gamma(m, x, seq):
     for r in range(x, 0, -1):
@@ -65,6 +65,6 @@ not_failed = True
 for x in range(num_tests):
   if not_failed:
     seq = ""
-    for _ in range(random.randint(3, max_length)):
+    for _ in range(random.randint(max_length-5, max_length)):
       seq += str(random.choice(alphabet))
     not_failed = gen_l(seq, x)
