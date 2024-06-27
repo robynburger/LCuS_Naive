@@ -5,13 +5,13 @@ import numpy as np
 # seq[r] == seq[m], or 0 if no such value exists
 
 # characters allowed in test string 
-alphabet = ['a', 'b', 'c', 'd']
+alphabet = ['a', 'b', 'c']
 
 # max size of the test string 
-max_length = 10
+max_length = 20
 
 # number of test cases
-num_tests = 5
+num_tests = 100000
 
 def gamma(m, x, seq):
     for r in range(x, 0, -1):
@@ -53,7 +53,7 @@ def gen_l(seq, count):
                               l_vector[l] = f[m, j, i, k, l] - f[m, j, i-1, k-1, l]
                     # l_vector = np.array([0, 1, 0, 1, 0])
                     if np.any(l_vector) == 1 and not check_l(l_vector):
-                        print(f"\t Test {count}: Fail {seq}")
+                        print(f"Test {count}: Fail {seq}")
                         print(f"m: {m}, j: {j}, i: {i}, k: {k}")
                         print(l_vector)
                         print("\n")
