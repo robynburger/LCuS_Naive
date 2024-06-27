@@ -49,7 +49,8 @@ def gen_l(seq):
                         f[m, j, i, k, l] = f[m - 1, j, i, k, l]
                         if gamma(m, i, seq) > 0 and gamma(m, k, seq) >= j:
                             f[m, j, i, k, l] = max(f[m, j, i, k, l], f[m-1, j, gamma(m, i, seq)-1, gamma(m, k, seq)-1, l]+1)
-                        l_vector[l] = f[m, j, i, k, l] - f[m, j, i-1, k-1, l]
+                            if seq[i-1] == seq[k-1]: 
+                              l_vector[l] = f[m, j, i, k, l] - f[m, j, i-1, k-1, l]
                     # l_vector = np.array([0, 1, 0, 1, 0])
                     if np.any(l_vector) == 1 and not check_l(l_vector):
                         print(f"{seq}")
