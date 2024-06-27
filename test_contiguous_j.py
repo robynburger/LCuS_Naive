@@ -39,16 +39,17 @@ def gen_j_vector(seq, count):
     f = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)      # f[m,j,i,k,l]
 
     # for each j, i, k
-    for i in range(1, n+1):
-        for j in range(i+1, n+1):
-            l = random.randint(j+1, n+1)
-            for k in range(j, l):
-                j_vector = np.zeros((n+1), dtype=int)
-                f[n, j, i, k, l] = f[n - 1, j, i, k, l]
-                if gamma(n, i, seq) > 0 and gamma(n, k, seq) >= j:
-                    f[n, j, i, k, l] = max(f[n, j, i, k, l], f[n-1, j, gamma(n, i, seq)-1, gamma(n, k, seq)-1, l]+1)
+    for l in range(3, n+1):
+        for k in range(2, l):
+            for i in range(1, k):
+                for j in range(i+1, k):
+                    j_vector = np.zeros((n+1), dtype=int)
+                    f[n, j, i, k, l] = f[n - 1, j, i, k, l]
+                    if gamma(n, i, seq) > 0 and gamma(n, k, seq) >= j:
+                        f[n, j, i, k, l] = max(f[n, j, i, k, l], f[n-1, j, gamma(n, i, seq)-1, gamma(n, k, seq)-1, l]+1)
                 
-                j_vector[j] = f[n, j, i, k, l] - f[n, j, i-1, k, l]
+                    j_vector[j] = f[n, j, i, k, l] - f[n, j, i-1, k, l]
+                    
                 if np.any(j_vector) == 1 and not check_j(j_vector):
                     print(f"\t Test {count}: Fail {seq}")
                     print(f"n: {n}, i: {i}, k: {k}, l: {l}")
