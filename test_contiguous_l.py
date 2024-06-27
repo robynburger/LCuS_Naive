@@ -11,7 +11,7 @@ alphabet = ['a', 'b', 'c', 'd']
 max_length = 10
 
 # number of test cases
-num_tests = 100000
+num_tests = 500
 
 def gamma(m, x, seq):
     for r in range(x, 0, -1):
@@ -49,7 +49,8 @@ def gen_l(seq):
                         f[m, j, i, k, l] = f[m - 1, j, i, k, l]
                         if gamma(m, i, seq) > 0 and gamma(m, k, seq) >= j:
                             f[m, j, i, k, l] = max(f[m, j, i, k, l], f[m-1, j, gamma(m, i, seq)-1, gamma(m, k, seq)-1, l]+1)
-                        l_vector[l-1] = f[m, j, i, k, l] - f[m, j, i-1, k-1, l]
+                        l_vector[l] = f[m, j, i, k, l] - f[m, j, i-1, k-1, l]
+                    # l_vector = np.array([0, 1, 0, 1, 0])
                     if np.any(l_vector) == 1 and not check_l(l_vector):
                         print(f"{seq}")
                         print(f"m: {m}, j: {j}, i: {i}, k: {k}")
@@ -59,10 +60,10 @@ def gen_l(seq):
     print(f"Pass {seq}")
     return True
         
-test_failed = False
-while not test_failed:
-  for _ in range(num_tests):
+not_failed = True
+for _ in range(num_tests):
+  while not_failed:
     seq = ""
     for _ in range(random.randint(3, max_length)):
       seq += str(random.choice(alphabet))
-    test_failed = gen_l(seq)
+    not_failed = gen_l(seq)
