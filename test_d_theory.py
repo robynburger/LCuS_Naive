@@ -9,6 +9,8 @@
 # d(m, i, j, k-1, l) = f(m, i, j, k-1, l) - f(m, i-1, j, k-1, l)
 
 import numpy as np
+import sys
+import random
 
 # gamma(m, x, seq) is the largest value of r such that r <= x and 
 # seq[r] == seq[m], or 0 if no such value exists
@@ -33,7 +35,7 @@ def gen_D(seq):
                             f[m, i, j, k, l] = max(f[m, i, j, k, l], 
                                                    f[m-1, gamma(m, i, seq)-1, j, gamma(m, k, seq)-1, l]+1)
                         d[m, i, j, k, l] = f[m, i, j, k, l] - f[m, i-1, j, k, l]
-                        if d[m-1, i, j, k, l] == 1 and d[m, i, j, k-1, l] == 1 and seq[k-1] == seq[m-1]:
+                        if seq[i-1] != seq[k-1]:
                             print(f"d[{m}, {i}, {j}, {k}, {l}] = {d[m, i, j, k, l]}")
                             print(f"d[{m-1}, {i}, {j}, {k}, {l}] = {d[m-1, i, j, k, l]}")
                             if k-1 >= j:
@@ -44,9 +46,23 @@ def gen_D(seq):
                                 if k-1 >= j:
                                     print(f"    k-1 case:")
                                     print(f"    d[{m}, {r}, {j}, {k-1}, {l}] = {d[m, r, j, k-1, l]}")
+                                if d[m-1, r, j, k, l] == 1 or d[m, r, j, k-1, l] == 1:
+                                    sys.exit("ERROR: d = 1, should be 0.")
                             print(f"    s[i] = {seq[i-1]}, s[k] = {seq[k-1]}, s[m] = {seq[m-1]}")
                             print("\n")
 
-gen_D("ccabbcabbcbbcccacaa")
-    
+# characters allowed in test string 
+alphabet = ['a', 'b', 'c', 'd']
 
+# max size of the test string 
+max_length = 20
+
+# number of test cases
+num_tests = 1000
+
+for x in range(num_tests):
+    seq = ""
+    for _ in range(random.randint(max_length-5, max_length)):
+      seq += str(random.choice(alphabet))
+    gen_D(seq)
+    
