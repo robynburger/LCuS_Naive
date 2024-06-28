@@ -28,11 +28,25 @@ def gen_D(seq):
             for j in range(i+1, n+1):
                 for k in range(j, n+1):
                     for l in range(k+1, m+1):
-                        f[m, j, i, k, l] = f[m - 1, j, i, k, l]
+                        f[m, i, j, k, l] = f[m-1, i, j, k, l]
                         if gamma(m, i, seq) > 0 and gamma(m, k, seq) >= j:
-                            f[m, j, i, k, l] = max(f[m, j, i, k, l], 
-                                                   f[m-1, j, gamma(m, i, seq)-1, gamma(m, k, seq)-1, l]+1)
-                        d[m, j, i, k, l] = f[m, j, i, k, l] - f[m, i-1, j, k, l]
-    return d
+                            f[m, i, j, k, l] = max(f[m, i, j, k, l], 
+                                                   f[m-1, gamma(m, i, seq)-1, j, gamma(m, k, seq)-1, l]+1)
+                        d[m, i, j, k, l] = f[m, i, j, k, l] - f[m, i-1, j, k, l]
+                        if d[m-1, i, j, k, l] == 1 and d[m, i, j, k-1, l] == 1 and seq[k-1] == seq[m-1]:
+                            print(f"d[{m}, {i}, {j}, {k}, {l}] = {d[m, i, j, k, l]}")
+                            print(f"d[{m-1}, {i}, {j}, {k}, {l}] = {d[m-1, i, j, k, l]}")
+                            if k-1 >= j:
+                                print(f"d[{m}, {i}, {j}, {k-1}, {l}] = {d[m, i, j, k-1, l]}")
+                            for r in range(gamma(m, i-1, seq), i):
+                                print(f"    m-1 case:")
+                                print(f"    d[{m-1}, {r}, {j}, {k}, {l}] = {d[m-1, r, j, k, l]}")
+                                if k-1 >= j:
+                                    print(f"    k-1 case:")
+                                    print(f"    d[{m}, {r}, {j}, {k-1}, {l}] = {d[m, r, j, k-1, l]}")
+                            print(f"    s[i] = {seq[i-1]}, s[k] = {seq[k-1]}, s[m] = {seq[m-1]}")
+                            print("\n")
+
+gen_D("ccabbcabbcbbcccacaa")
     
 
