@@ -45,30 +45,43 @@ def gen_D(seq, count):
                             f[m, i, j, k, l] = max(f[m, i, j, k, l], 
                                                    f[m-1, gamma(m, i, seq)-1, j, gamma(m, k, seq)-1, l]+1)
                         d[m, i, j, k, l] = f[m, i, j, k, l] - f[m, i-1, j, k, l]
-                        # test 07/01
+                        
+                        """
+                        # test 07/01 - 1.1 reverse
+                        if seq[m-1] == seq[k-1] and d[m-1, i, j, k-1, l] == 1:
+                            all_zero = True
+                            # print(f"gamma(k, i-1): {gamma(k, i-1, seq)}")
+                            for r in range(gamma(k, i-1, seq), i):
+                                if r == 0 or d[m-1, r, j, k-1, l] != 0:
+                                    all_zero = False
+                            if all_zero and d[m, i, j, k, l] != 0:
+                                sys.exit(f"ERROR: {seq}. i: {i}, j: {j}, k: {k}, l: {l}, m: {m}")
+                        """
+                        # test 07/01 - 1.1 forward
                         if seq[m-1] == seq[k-1] and d[m-1, i, j, k-1, l] == 1 and d[m, i, j, k, l] == 0:
                             # print(f"gamma(k, i-1): {gamma(k, i-1, seq)}")
                             for r in range(gamma(k, i-1, seq), i):
-                                if d[m-1, r, j, k-1, l] != 0:
+                                if r == 0 or d[m-1, r, j, k-1, l] != 0:
                                     print(f"r: {r}")
                                     sys.exit(f"ERROR: {seq}. i: {i}, j: {j}, k: {k}, l: {l}, m: {m}")
-                            """
-                            print(f"d[{m}, {i}, {j}, {k}, {l}] = {d[m, i, j, k, l]}")
-                            print(f"d[{m-1}, {i}, {j}, {k}, {l}] = {d[m-1, i, j, k, l]}")
+                        
+                        """
+                        print(f"d[{m}, {i}, {j}, {k}, {l}] = {d[m, i, j, k, l]}")
+                        print(f"d[{m-1}, {i}, {j}, {k}, {l}] = {d[m-1, i, j, k, l]}")
+                        if k-1 >= j:
+                            print(f"d[{m}, {i}, {j}, {k-1}, {l}] = {d[m, i, j, k-1, l]}")
+                        for r in range(gamma(m, i-1, seq), i):
+                            print(f"    m-1 case:")
+                            print(f"    d[{m-1}, {r}, {j}, {k}, {l}] = {d[m-1, r, j, k, l]}")
                             if k-1 >= j:
-                                print(f"d[{m}, {i}, {j}, {k-1}, {l}] = {d[m, i, j, k-1, l]}")
-                            for r in range(gamma(m, i-1, seq), i):
-                                print(f"    m-1 case:")
-                                print(f"    d[{m-1}, {r}, {j}, {k}, {l}] = {d[m-1, r, j, k, l]}")
-                                if k-1 >= j:
-                                    print(f"    k-1 case:")
-                                    print(f"    d[{m}, {r}, {j}, {k-1}, {l}] = {d[m, r, j, k-1, l]}")
-                                if d[m-1, r, j, k, l] == 1 or d[m, r, j, k-1, l] == 1:
-                                    sys.exit("ERROR: d = 1, should be 0.")
-                            print(f"    s[i] = {seq[i-1]}, s[k] = {seq[k-1]}, s[m] = {seq[m-1]}")
-                            print("\n")
-                            """
-    if count % 1000 == 0:
+                                print(f"    k-1 case:")
+                                print(f"    d[{m}, {r}, {j}, {k-1}, {l}] = {d[m, r, j, k-1, l]}")
+                            if d[m-1, r, j, k, l] == 1 or d[m, r, j, k-1, l] == 1:
+                                sys.exit("ERROR: d = 1, should be 0.")
+                        print(f"    s[i] = {seq[i-1]}, s[k] = {seq[k-1]}, s[m] = {seq[m-1]}")
+                        print("\n")
+                        """
+    if count % 10000 == 0:
         print(f"PASSED. {count}")
 
 # characters allowed in test string 
