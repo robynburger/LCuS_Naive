@@ -46,6 +46,16 @@ def gen_D(seq, count):
                                                    f[m-1, gamma(m, i, seq)-1, j, gamma(m, k, seq)-1, l]+1)
                         d[m, i, j, k, l] = f[m, i, j, k, l] - f[m, i-1, j, k, l]
                         
+                        # test 07/01 - 1.2 reverse
+                        if seq[m-1] == seq[k-1] and d[m-1, i, j, k-1, l] == 0:
+                            exists_1 = False
+                            for r in range(gamma(k, i-1, seq), i):
+                                if r == 0 or d[m-1, r, j, k-1, l] == 1:
+                                    exists_1 = True
+                            if exists_1 and seq[k-1] == seq[i-1] and d[m, i, j, k, l] == 0:
+                                sys.exit(f"ERROR: {seq}. i: {i}, j: {j}, k: {k}, l: {l}, m: {m}")
+
+                        """
                         # test 07/01 - 1.2 forward
                         if seq[m-1] == seq[k-1] and d[m-1, i, j, k-1, l] == 0 and d[m, i, j, k, l] == 1:
                             if seq[k-1] != seq[i-1]:
@@ -56,7 +66,7 @@ def gen_D(seq, count):
                                     exists_1 = True
                             if exists_1 == False:
                                 sys.exit(f"ERROR: {seq}. i: {i}, j: {j}, k: {k}, l: {l}, m: {m}")
-
+                        """
 
                         """
                         # test 07/01 - 1.1 reverse
@@ -102,7 +112,7 @@ alphabet = ['a', 'b', 'c', 'd', 'e']
 max_length = 20
 
 # number of test cases
-num_tests = 20000
+num_tests = 30000
 
 for x in range(num_tests):
     seq = ""
