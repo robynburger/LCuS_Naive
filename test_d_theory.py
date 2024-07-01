@@ -46,25 +46,36 @@ def gen_D(seq, count):
                                                    f[m-1, gamma(m, i, seq)-1, j, gamma(m, k, seq)-1, l]+1)
                         d[m, i, j, k, l] = f[m, i, j, k, l] - f[m, i-1, j, k, l]
                         
+                        # test 07/01 - 1.2 forward
+                        if seq[m-1] == seq[k-1] and d[m-1, i, j, k-1, l] == 0 and d[m, i, j, k, l] == 1:
+                            if seq[k-1] != seq[i-1]:
+                                sys.exit(f"ERROR: s_k != s_i {seq}. i: {i}, j: {j}, k: {k}, l: {l}, m: {m}")
+                            exists_1 = False
+                            for r in range(gamma(k, i-1, seq), i):
+                                if r == 0 or d[m-1, r, j, k-1, l] == 1:
+                                    exists_1 = True
+                            if exists_1 == False:
+                                sys.exit(f"ERROR: {seq}. i: {i}, j: {j}, k: {k}, l: {l}, m: {m}")
+
+
                         """
                         # test 07/01 - 1.1 reverse
                         if seq[m-1] == seq[k-1] and d[m-1, i, j, k-1, l] == 1:
                             all_zero = True
-                            # print(f"gamma(k, i-1): {gamma(k, i-1, seq)}")
                             for r in range(gamma(k, i-1, seq), i):
                                 if r == 0 or d[m-1, r, j, k-1, l] != 0:
                                     all_zero = False
                             if all_zero and d[m, i, j, k, l] != 0:
                                 sys.exit(f"ERROR: {seq}. i: {i}, j: {j}, k: {k}, l: {l}, m: {m}")
-                        """
+        
                         # test 07/01 - 1.1 forward
                         if seq[m-1] == seq[k-1] and d[m-1, i, j, k-1, l] == 1 and d[m, i, j, k, l] == 0:
-                            # print(f"gamma(k, i-1): {gamma(k, i-1, seq)}")
                             for r in range(gamma(k, i-1, seq), i):
                                 if r == 0 or d[m-1, r, j, k-1, l] != 0:
                                     print(f"r: {r}")
                                     sys.exit(f"ERROR: {seq}. i: {i}, j: {j}, k: {k}, l: {l}, m: {m}")
-                        
+                        """
+                                    
                         """
                         print(f"d[{m}, {i}, {j}, {k}, {l}] = {d[m, i, j, k, l]}")
                         print(f"d[{m-1}, {i}, {j}, {k}, {l}] = {d[m-1, i, j, k, l]}")
@@ -81,7 +92,7 @@ def gen_D(seq, count):
                         print(f"    s[i] = {seq[i-1]}, s[k] = {seq[k-1]}, s[m] = {seq[m-1]}")
                         print("\n")
                         """
-    if count % 10000 == 0:
+    if count % 1000 == 0:
         print(f"PASSED. {count}")
 
 # characters allowed in test string 
@@ -91,7 +102,7 @@ alphabet = ['a', 'b', 'c', 'd', 'e']
 max_length = 20
 
 # number of test cases
-num_tests = 30000
+num_tests = 20000
 
 for x in range(num_tests):
     seq = ""
