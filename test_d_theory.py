@@ -30,7 +30,7 @@ def gamma(m, x, seq):
             return r
     return 0
 
-def gen_D(seq):
+def gen_D(seq, count):
     n = len(seq)
     f = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)      # f[m,j,i,k,l]
     d = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)      # d[m,j,i,k,l]
@@ -46,11 +46,11 @@ def gen_D(seq):
                                                    f[m-1, gamma(m, i, seq)-1, j, gamma(m, k, seq)-1, l]+1)
                         d[m, i, j, k, l] = f[m, i, j, k, l] - f[m, i-1, j, k, l]
                         # test 07/01
-                        if seq[i-1] != seq[k-1] and d[m, i, j, k-1, l] == 1 and d[m, i, j, k, l] == 0:
+                        if seq[m-1] == seq[k-1] and d[m-1, i, j, k-1, l] == 1 and d[m, i, j, k, l] == 0:
                             # print(f"gamma(k, i-1): {gamma(k, i-1, seq)}")
                             for r in range(gamma(k, i-1, seq), i):
-                                if d[m, r, j, k-1, l] != 0:
-                                    # print(f"r: {r}")
+                                if d[m-1, r, j, k-1, l] != 0:
+                                    print(f"r: {r}")
                                     sys.exit(f"ERROR: {seq}. i: {i}, j: {j}, k: {k}, l: {l}, m: {m}")
                             """
                             print(f"d[{m}, {i}, {j}, {k}, {l}] = {d[m, i, j, k, l]}")
@@ -68,19 +68,20 @@ def gen_D(seq):
                             print(f"    s[i] = {seq[i-1]}, s[k] = {seq[k-1]}, s[m] = {seq[m-1]}")
                             print("\n")
                             """
-    print("PASSED.")
+    if count % 1000 == 0:
+        print(f"PASSED. {count}")
 
 # characters allowed in test string 
-alphabet = ['a', 'b', 'c', 'd']
+alphabet = ['a', 'b', 'c', 'd', 'e']
 
 # max size of the test string 
-max_length = 15
+max_length = 20
 
 # number of test cases
-num_tests = 10000000
+num_tests = 30000
 
 for x in range(num_tests):
     seq = ""
-    for _ in range(random.randint(max_length-5, max_length)):
-      seq += str(random.choice(alphabet))
-    gen_D(seq)
+    for _ in range(random.randint(max_length-5, max_length)):      
+        seq += str(random.choice(alphabet))
+    gen_D(seq, x)
