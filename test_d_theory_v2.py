@@ -30,7 +30,7 @@ def gamma(m, x, seq):
             return r
     return 0
 
-def gen_D(seq, count, num_k, num_m):
+def gen_D(seq, count):
     n = len(seq)
     f = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)      # f[m,j,i,k,l]
     d = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)      # d[m,j,i,k,l]
@@ -47,21 +47,30 @@ def gen_D(seq, count, num_k, num_m):
                         d[m, i, j, k, l] = f[m, i, j, k, l] - f[m, i-1, j, k, l]
                         
                       # Test page 2 - 7/01 
-                        if seq[k-1] != seq[m-1]:
-                          if seq[i-1] == seq[k-1]: 
+                        if seq[k-1] != seq[m-1] and seq[i-1] == seq[m-1]:
                             #print(f" sk = {seq[k-1]} != sm={seq[m-1]}, and sk= si={seq[i-1]}") 
+                            # if d[m, i, j, k, l] ==  d[m-1, i, j, k, l]:
+                            #   num_k = num_k + 1
+                            #   if d[m, i, j, k, l] == 0:
+                            #     print(f"m-case:  d[m, i, j, k, l] = { d[m, i, j, k, l]},  d[m-1, i, j, k, l] = { d[m-1, i, j, k, l]}")
+                            # num_m = num_m + 1
+                              # if  d[m, i, j, k, l] == 0:
+                          if gamma(m, k-1, seq) < 1:  
                             if d[m, i, j, k, l] ==  d[m-1, i, j, k, l]:
-                              num_k = num_k + 1
-                             # print(f"k-case:  d[m, i, j, k, l] = { d[m, i, j, k, l]},  d[m, i, j, k-1, l] = { d[m-1, i, j, k-1, l]}")
-                            if d[m, i, j, k, l] ==  d[m, i, j, k-1, l]:
-                              num_m = num_m + 1
-                              #print(f"m-case:  d[m, i, j, k, l] = { d[m, i, j, k, l]},  d[m-1, i, j, k, l] = { d[m-1, i, j, k, l]}")
+                              count == count + 1
+                            else:
+                                  print(f"d[m, i, j, k, l] = { d[m, i, j, k, l]},  d[m, i, j, k-1, l] = { d[m, i, j, k-1, l]}")
+                                  print(f"gamma(m, k, seq) = {gamma(m, k, seq)}")
+                                  print(f"k = {k}")
+                                  print(f"gamma(m-1, k, seq) = {gamma(m-1, k, seq)}")
+                                  sys.exit("ERROR!")
+                                  
+                               
+
                              #print(f"neither:  d[m, i, j, k, l] = { d[m, i, j, k, l]},  d[m-1, i, j, k, l] = { d[m-1, i, j, k, l]},  d[m, i, j, k-1, l] = { d[m, i, j, k-1, l]}")
 
-    # if count % 1000 == 0:
-    #     print(f"PASSED. {count}")
-    print(num_k, num_m)
-    return num_k, num_m
+    if count % 1000 == 0:
+        print(f"PASSED. {count}")
 
 # characters allowed in test string 
 alphabet = ['a', 'b', 'c', 'd', 'e']
@@ -70,15 +79,15 @@ alphabet = ['a', 'b', 'c', 'd', 'e']
 max_length = 20
 
 # number of test cases
-num_tests = 200
+num_tests = 100000
 
 # Counts the number of k and m 
-num_k = 0
-num_m = 0
+# num_k = 0
+# num_m = 0
 
 for x in range(num_tests):
     seq = ""
     for _ in range(random.randint(max_length-5, max_length)):      
         seq += str(random.choice(alphabet))
-    num_k2, num_m2 = gen_D(seq, x, num_k, num_m)
+    gen_D(seq, x)
 # print(f"{num_k} k-cases, {num_m} m-cases")
