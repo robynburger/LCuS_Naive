@@ -2,9 +2,6 @@
 import random
 import numpy as np
 
-# gamma(m, x, seq) is the largest value of r such that r <= x and 
-# seq[r] == seq[m], or 0 if no such value exists
-
 # characters allowed in test string 
 alphabet = ['a', 'b', 'c']
 
@@ -58,7 +55,6 @@ def gen_l(seq, count):
                         print(l_vector)
                         print("\n")
                         return False
-    count = count + 1
     if count % 1000 == 0:
         print(f"Pass {count}")
     return True
