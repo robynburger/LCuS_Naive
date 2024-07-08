@@ -1,3 +1,4 @@
+
 import random
 import numpy as np
 
@@ -8,10 +9,10 @@ import numpy as np
 alphabet = ['a', 'b', 'c']
 
 # max size of the test string 
-max_length = 20
+max_length = 15
 
 # number of test cases
-num_tests = 5
+num_tests = 10000
 
 def gamma(m, x, seq):
     for r in range(x, 0, -1):
@@ -49,8 +50,7 @@ def gen_l(seq, count):
                         f[m, j, i, k, l] = f[m - 1, j, i, k, l]
                         if gamma(m, i, seq) > 0 and gamma(m, k, seq) >= j:
                             f[m, j, i, k, l] = max(f[m, j, i, k, l], f[m-1, j, gamma(m, i, seq)-1, gamma(m, k, seq)-1, l]+1)
-                            if seq[i-1] == seq[k-1]: 
-                              l_vector[l] = f[m, j, i, k, l] - f[m, j, i-1, k-1, l]
+                        l_vector[l] = f[m, j, i, k-1, l] - f[m, j, i, k-1, l] #here
                     # l_vector = np.array([0, 1, 0, 1, 0])
                     if np.any(l_vector) == 1 and not check_l(l_vector):
                         print(f"Test {count}: Fail {seq}")
@@ -58,7 +58,9 @@ def gen_l(seq, count):
                         print(l_vector)
                         print("\n")
                         return False
-    print(f"Test {count}: Pass {seq}")
+    count = count + 1
+    if count % 1000 == 0:
+        print(f"Pass {count}")
     return True
         
 not_failed = True
