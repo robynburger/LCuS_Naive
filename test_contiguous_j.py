@@ -58,8 +58,10 @@ def gen_j_vector(seq, count):
                         print(j_vector)
                         print("\n")
                         return False
-    print(f"Test {count}: Pass {seq}")
-    return True 
+    count = count + 1
+    if count % 1000 == 0:
+        print(f"Pass {count}")
+    return True
         
 not_failed = True
 for x in range(num_tests):
