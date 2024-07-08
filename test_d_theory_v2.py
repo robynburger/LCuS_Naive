@@ -47,7 +47,28 @@ def gen_D(seq, count):
                         d[m, i, j, k, l] = f[m, i, j, k, l] - f[m, i-1, j, k, l]
                         
                       # Test page 2 - 7/01 
-                        if seq[k-1] != seq[m-1] and seq[i-1] == seq[m-1]:
+                        if seq[k-1] != seq[m-1]:
+                            if d[m, i, j, k-1, l] != d[m-1, i, j, k, l]:
+                                d_sum_k = 0
+                                d_sum_m = 0
+                                for prev_i in range(1, i+1):
+                                    d_sum_k += d[m, prev_i, j, k-1, l]
+                                    d_sum_m += d[m-1, prev_i, j, k, l]
+                                test_d = 0
+                                if d_sum_m > d_sum_k:
+                                    test_d = d[m-1, i, j, k, l]
+                                elif d_sum_k > d_sum_m:
+                                    test_d = d[m, i, j, k-1, l]
+                                else:
+                                    test_d = 0
+                                if d[m, i, j, k, l] != test_d:
+                                    print(f"d[m, i, j, k, l] = { d[m, i, j, k, l]},  d[m, i, j, k-1, l] = { d[m, i, j, k-1, l]}")
+                                    print(f"gamma(m, k, seq) = {gamma(m, k, seq)}")
+                                    print(f"k = {k}")
+                                    print(f"gamma(m-1, k, seq) = {gamma(m-1, k, seq)}")
+                                    sys.exit("ERROR!")
+                        
+                            """
                             #print(f" sk = {seq[k-1]} != sm={seq[m-1]}, and sk= si={seq[i-1]}") 
                             # if d[m, i, j, k, l] ==  d[m-1, i, j, k, l]:
                             #   num_k = num_k + 1
@@ -55,7 +76,7 @@ def gen_D(seq, count):
                             #     print(f"m-case:  d[m, i, j, k, l] = { d[m, i, j, k, l]},  d[m-1, i, j, k, l] = { d[m-1, i, j, k, l]}")
                             # num_m = num_m + 1
                               # if  d[m, i, j, k, l] == 0:
-                          if gamma(m, k-1, seq) < 1:  
+                            if gamma(m, k-1, seq) < 1:  
                             if d[m, i, j, k, l] ==  d[m-1, i, j, k, l]:
                               count == count + 1
                             else:
@@ -68,6 +89,7 @@ def gen_D(seq, count):
                                
 
                              #print(f"neither:  d[m, i, j, k, l] = { d[m, i, j, k, l]},  d[m-1, i, j, k, l] = { d[m-1, i, j, k, l]},  d[m, i, j, k-1, l] = { d[m, i, j, k-1, l]}")
+                            """
 
     if count % 1000 == 0:
         print(f"PASSED. {count}")
