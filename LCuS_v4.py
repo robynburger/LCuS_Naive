@@ -71,7 +71,8 @@ def LCuS(seq):
                           D[i, j, k, m] = d[m, i, j, k-1, l]
                       else:
                           D[i, j, k, m] = 0
-         
+          print(f"i ={i}, j= {j}, k= {k}, m = {m}")
+          print(str(D))
     # for p in range(1, n + 1): 
     #         print(f"p = {p}")
     #         for q in range(p+1, n):  
