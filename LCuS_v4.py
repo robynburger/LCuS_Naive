@@ -56,19 +56,19 @@ def LCuS(seq):
                   # sm != sk
                   else:
                     # Case 3:
-                    if d[m, i, j, k-1, l] == d[m-1, i, j, k, l]:
-                      D[i, j, k, m] == d[m, i, j, k-1, l]
+                    if D[i, j, k-1, m] == D[i, j, k, m-1]:
+                      D[i, j, k, m] == D[i, j, k-1, m]
                     # Case 4: (New case)
                     else:
                       d_sum_k = 0
                       d_sum_m = 0
                       for prev_i in range(1, i+1):
-                          d_sum_k += d[m, prev_i, j, k-1, l]
-                          d_sum_m += d[m-1, prev_i, j, k, l]
+                          d_sum_k += D[prev_i, j, k-1, m]
+                          d_sum_m += D[prev_i, j, k, m-1]
                       if d_sum_m > d_sum_k:
-                          D[i, j, k, m] = d[m-1, i, j, k, l]
+                          D[i, j, k, m] = D[i, j, k, m-1]
                       elif d_sum_k > d_sum_m:
-                          D[i, j, k, m] = d[m, i, j, k-1, l]
+                          D[i, j, k, m] = D[i, j, k-1, m]
                       else:
                           D[i, j, k, m] = 0
           print(f"i ={i}, j= {j}, k= {k}, m = {m}")
