@@ -1,9 +1,6 @@
 import random
 import numpy as np
 
-# gamma(m, x, seq) is the largest value of r such that r <= x and 
-# seq[r] == seq[m], or 0 if no such value exists
-
 # characters allowed in test string 
 alphabet = ['a', 'b', 'c']
 
