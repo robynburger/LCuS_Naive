@@ -8,7 +8,7 @@ import numpy as np
 alphabet = ['a', 'b', 'c']
 
 # max size of the test string 
-max_length = 15
+max_length = 10
 
 # number of test cases
 num_tests = 1000000000
@@ -19,7 +19,7 @@ def gamma(m, x, seq):
             return r
     return 0
 
-def check_j(j_vec): 
+def check_j(j_vec, i): 
     first_one_index = -1
     last_one_index = -1
     for x in range(len(j_vec)):
@@ -32,7 +32,11 @@ def check_j(j_vec):
     for y in range(first_one_index, last_one_index +1):
         if j_vec[y] != 1:
             return False
-    return True
+    if first_one_index == i+1 or first_one_index == -1:
+        return True
+    else: 
+        print(f"First one at {first_one_index}, but i+1 = {i+1}")
+        return False 
 
 def gen_j_vector(seq, count):
     n = len(seq)
@@ -52,13 +56,13 @@ def gen_j_vector(seq, count):
                 
                         j_vector[j] = f[n, j, i, k, l] - f[n, j, i-1, k, l]
                     # Check 1s are contiguous 
-                    if np.any(j_vector) == 1 and not check_j(j_vector):
+                    if np.any(j_vector) == 1 and not check_j(j_vector, i):
                         print(f"Test {count}: Fail {seq}")
                         print(f"m: {m}, j: {j}, i: {i}, k: {k}")
                         print(j_vector)
                         print("\n")
                         return False
-    count = count + 1
+    # count = count + 1
     if count % 1000 == 0:
         print(f"Pass {count}")
     return True

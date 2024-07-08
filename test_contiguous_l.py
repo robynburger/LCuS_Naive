@@ -6,7 +6,7 @@ import numpy as np
 alphabet = ['a', 'b', 'c']
 
 # max size of the test string 
-max_length = 15
+max_length = 10
 
 # number of test cases
 num_tests = 10000
@@ -18,7 +18,7 @@ def gamma(m, x, seq):
     return 0
 
 
-def check_l(l_vec): 
+def check_l(l_vec, k): 
     first_one_index = -1
     last_one_index = -1
     for x in range(len(l_vec)):
@@ -31,6 +31,9 @@ def check_l(l_vec):
     for y in range(first_one_index, last_one_index +1):
         if l_vec[y] != 1:
             return False
+    if first_one_index != k+1 or first_one_index != -1:
+        print(f"First one at {first_one_index}, but k+1 = {k+1}")
+        return False 
     return True
 
 def gen_l(seq, count):
@@ -49,7 +52,7 @@ def gen_l(seq, count):
                             f[m, j, i, k, l] = max(f[m, j, i, k, l], f[m-1, j, gamma(m, i, seq)-1, gamma(m, k, seq)-1, l]+1)
                         l_vector[l] = f[m, j, i, k-1, l] - f[m, j, i, k-1, l] #here
                     # l_vector = np.array([0, 1, 0, 1, 0])
-                    if np.any(l_vector) == 1 and not check_l(l_vector):
+                    if np.any(l_vector) == 1 and not check_l(l_vector, k):
                         print(f"Test {count}: Fail {seq}")
                         print(f"m: {m}, j: {j}, i: {i}, k: {k}")
                         print(l_vector)
