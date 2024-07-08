@@ -46,7 +46,7 @@ def gen_D(seq, count):
                                                    f[m-1, gamma(m, i, seq)-1, j, gamma(m, k, seq)-1, l]+1)
                         d[m, i, j, k, l] = f[m, i, j, k, l] - f[m, i-1, j, k, l]
                         
-                      # Test page 2 - 7/01 
+                      # test theory 7/08
                         if seq[k-1] != seq[m-1]:
                             if d[m, i, j, k-1, l] != d[m-1, i, j, k, l]:
                                 d_sum_k = 0
