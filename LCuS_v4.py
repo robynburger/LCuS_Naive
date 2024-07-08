@@ -30,49 +30,47 @@ def LCuS(seq):
     D = np.zeros((n+1, n+1, n+1, n+1), dtype=int)
 
 # Populate D tensor 
-    for i in range(1, n+1):
-      for j in range(i+1, n+1):
-        for k in range(j, n+1):
-          for m in range(k+1, n+1):
-                # sm = sk 
-                if seq[m-1]==seq[k-1]:
-                  # Case 1
-                  if D[i, j, k-1, m-1] == 1:
-                    for r in range(gamma(m, i-1, seq), i): 
-                        if D[r, j, k-1, m-1] == 1:
-                          D[i, j, k, m] == 0
-                          break
-                        D[i, j, k, m] == 1
-                  # Case 2
-                  if D[i, j, k-1, m-1] == 0:
-                     if seq[i-1] == seq[k-1]:
-                      for r in range(gamma(m, i-1, seq), i): 
-                        if D[r, j, k-1, m-1] == 1:
-                          D[i, j, k, m] == 1
-                          break
-                        D[i, j, k, m] == 0
-                      else:
-                         D[i, j, k, m] == 0
-                  # sm != sk
-                  else:
-                    # Case 3:
-                    if D[i, j, k-1, m] == D[i, j, k, m-1]:
-                      D[i, j, k, m] == D[i, j, k-1, m]
-                    # Case 4: (New case)
+    for m in range(1, n+1):
+        for i in range(1, n+1):
+            for j in range(i+1, n+1):
+                for k in range(j, n+1):
+                    # sm = sk 
+                    if seq[m-1] == seq[k-1]:
+                        # Case 1
+                        if D[i, j, k-1, m-1] == 1:
+                            for r in range(gamma(k, i-1, seq), i): 
+                                if D[r, j, k-1, m-1] == 1:
+                                    D[i, j, k, m] == 1
+                                    break
+                            D[i, j, k, m] == 0
+                        # Case 2
+                        if D[i, j, k-1, m-1] == 0:
+                            if seq[i-1] == seq[k-1]:
+                                for r in range(gamma(k, i-1, seq), i): 
+                                    if D[r, j, k-1, m-1] == 1:
+                                        D[i, j, k, m] == 1
+                                        break
+                                D[i, j, k, m] == 0
+                    # sm != sk
                     else:
-                      d_sum_k = 0
-                      d_sum_m = 0
-                      for prev_i in range(1, i+1):
-                          d_sum_k += D[prev_i, j, k-1, m]
-                          d_sum_m += D[prev_i, j, k, m-1]
-                      if d_sum_m > d_sum_k:
-                          D[i, j, k, m] = D[i, j, k, m-1]
-                      elif d_sum_k > d_sum_m:
-                          D[i, j, k, m] = D[i, j, k-1, m]
-                      else:
-                          D[i, j, k, m] = 0
-          print(f"i ={i}, j= {j}, k= {k}, m = {m}")
-          print(str(D))
+                        # Case 3
+                        if D[i, j, k-1, m] == D[i, j, k, m-1]:
+                            D[i, j, k, m] == D[i, j, k-1, m]
+                        # Case 4 (New case)
+                        else:
+                            d_sum_k = 0
+                            d_sum_m = 0
+                            for prev_i in range(1, i+1):
+                                d_sum_k += D[prev_i, j, k-1, m]
+                                d_sum_m += D[prev_i, j, k, m-1]
+                            if d_sum_m > d_sum_k:
+                                D[i, j, k, m] = D[i, j, k, m-1]
+                            elif d_sum_k > d_sum_m:
+                                D[i, j, k, m] = D[i, j, k-1, m]
+                            else:
+                                D[i, j, k, m] = 0
+                    print(f"i ={i}, j= {j}, k= {k}, m = {m}")
+                    print(str(D))
     # for p in range(1, n + 1): 
     #         print(f"p = {p}")
     #         for q in range(p+1, n):  
