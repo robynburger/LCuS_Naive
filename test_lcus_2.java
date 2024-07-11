@@ -17,7 +17,6 @@ public class test_lcus_2 {
         int[][][][][] f = new int[s.length + 1][s.length + 1][s.length + 1][s.length + 1][s.length + 1]; // f[m,i,k,j,l]
         int[][][][][] d = new int[s.length + 1][s.length + 1][s.length + 1][s.length + 1][s.length + 1]; // d[m,i,k,j,l]
 
-
         // compute correct values first
         for (int m = 1; m <= s.length; m++) {
             for (int i = 1; i <= s.length; i++) {
@@ -31,9 +30,10 @@ public class test_lcus_2 {
                             if (f[m][i][k][j][l] > f[m][i - 1][k][j][l]) {
                                 d[m][i][k][j][l] = 1;
                             }
-                            if ((i == 4 ) && (k == 8) && (m == 12) && (l == 9))
-                                print(f"f[" + m + "][" + j + "][" + i + "][" + k + "][" + l + "] = " )
-                            print(f"f[{m}, {j}, {i-1}, {k}, {l}] = {f[m, j, i-1, k, l]}\n")
+                            if ((i == 4 ) && (k == 8) && (m == 12) && (l == 9)) {
+                                System.out.println("f[" + m + "][" + i + "][" + k + "][" + j + "][" + l + "] = " + f[m][i][k][j][l]);
+                                System.out.println("f[" + m + "][" + (i-1) + "][" + k + "][" + j + "][" + l + "] = " + f[m][i-1][k][j][l]);
+                            }
                         }
                     }
                 }
@@ -42,8 +42,7 @@ public class test_lcus_2 {
 
         int[] j_vector = new int[s.length + 1];
         for (int j = 5; j <= 8; j++) {
-            j_vector[j] = d[12][4][j][8][9];
-            System.out.println("f[12, ")
+            j_vector[j] = d[12][4][8][j][9];
         }
 
         System.out.println(Arrays.toString(j_vector));
