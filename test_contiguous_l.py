@@ -71,5 +71,5 @@ for x in range(num_tests):
         seq = ""
         for _ in range(random.randint(max_length-5, max_length)):
             seq += str(random.choice(alphabet))
-        seq = "cdabacbdabcd"
+        seq = "cdababcdacbd"
     not_failed = gen_l(seq, x)
