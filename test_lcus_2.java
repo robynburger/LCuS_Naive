@@ -33,6 +33,7 @@ public class test_lcus_2 {
                             if ((i == 4 ) && (k == 8) && (m == 12) && (l == 9)) {
                                 System.out.println("f[" + m + "][" + i + "][" + k + "][" + j + "][" + l + "] = " + f[m][i][k][j][l]);
                                 System.out.println("f[" + m + "][" + (i-1) + "][" + k + "][" + j + "][" + l + "] = " + f[m][i-1][k][j][l]);
+                                System.out.println();
                             }
                         }
                     }
