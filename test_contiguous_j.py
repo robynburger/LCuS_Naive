@@ -35,7 +35,7 @@ def check_j(j_vec, i):
         print(f"First one at {first_one_index}, but i+1 = {i+1}")
         return False 
 
-def gen_j_vector(seq, count):
+def gen_j_vector(seq):
     n = len(seq)
     f = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)      # f[m,j,i,k,l]
 
@@ -53,21 +53,23 @@ def gen_j_vector(seq, count):
                 
                         j_vector[j] = f[n, j, i, k, l] - f[n, j, i-1, k, l]
                     # Check 1s are contiguous 
-                    if np.any(j_vector) == 1 and not check_j(j_vector, i):
-                        print(f"Test {count}: Fail {seq}")
-                        print(f"m: {m}, j: {j}, i: {i}, k: {k}")
+                    # if np.any(j_vector) == 1 and not check_j(j_vector, i):
+                        # print(f"Test {count}: Fail {seq}")
+                        print(f"m: {m}, j: {j}, i: {i}, k: {k}, l: {l}")
                         print(j_vector)
                         print("\n")
-                        return False
-    # count = count + 1
-    if count % 1000 == 0:
-        print(f"Pass {count}")
-    return True
+                        # return False
+    # # count = count + 1
+    # if count % 1000 == 0:
+    #     print(f"Pass {count}")
+    # return True
         
-not_failed = True
-for x in range(num_tests):
-  if not_failed:
-    seq = ""
-    for _ in range(random.randint(max_length-5, max_length)):
-      seq += str(random.choice(alphabet))
-    not_failed = gen_j_vector(seq, x)
+# not_failed = True
+# for x in range(num_tests):
+#   if not_failed:
+#     seq = ""
+#     for _ in range(random.randint(max_length-5, max_length)):
+#       seq += str(random.choice(alphabet))
+#     not_failed = gen_j_vector(seq, x)
+
+gen_j_vector("wxyzabcwxabyzcabcwxyz")
