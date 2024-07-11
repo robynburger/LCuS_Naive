@@ -2,13 +2,13 @@ import random
 import numpy as np
 
 # characters allowed in test string 
-alphabet = ['a', 'b', 'c']
+alphabet = ['a', 'b', 'c', 'd']
 
 # max size of the test string 
 max_length = 10
 
 # number of test cases
-num_tests = 1000000000
+num_tests = 1
 
 def gamma(m, x, seq):
     for r in range(x, 0, -1):
@@ -32,10 +32,10 @@ def check_j(j_vec, i):
     if first_one_index == i+1 or first_one_index == -1:
         return True
     else: 
-        print(f"First one at {first_one_index}, but i+1 = {i+1}")
+        print(f"First 1 at index {first_one_index}, but i+1 = {i+1}")
         return False 
 
-def gen_j_vector(seq):
+def gen_j_vector(seq, count):
     n = len(seq)
     f = np.zeros((n+1, n+1, n+1, n+1, n+1), dtype=int)      # f[m,j,i,k,l]
 
@@ -43,39 +43,34 @@ def gen_j_vector(seq):
     for m in range(1, n+1):
         for i in range(1, n):
             for k in range(i+1, n):
-                for j in range(i+1, k+1):
-                    for l in range(k+1, m+1):
+                for l in range(k+1, m+1):
+
+                    j_vector = np.zeros((n+1), dtype=int)
+                    for j in range(i+1, k+1):
                         f[m, j, i, k, l] = f[m - 1, j, i, k, l]
                         if gamma(m, i, seq) > 0 and gamma(m, k, seq) >= j:
                             f[m, j, i, k, l] = max(f[m, j, i, k, l], f[m-1, j, gamma(m, i, seq)-1, gamma(m, k, seq)-1, l]+1)
-                
-    j_vector = np.zeros((n+1), dtype=int)
-    for j in range(5, 8+1):
-        j_vector[j] = f[12, j, 4, 8, 9] - f[12, j, 4-1, 8, 9]
-    print(j_vector)
+                        
+                        j_vector[j] = f[m, j, i, k, l] - f[m, j, i-1, k, l]
 
-gen_j_vector("abcdacbdcdab")
-"""
                     # Check 1s are contiguous 
-                    # if np.any(j_vector) == 1 and not check_j(j_vector, i):
-                        # print(f"Test {count}: Fail {seq}")
+                    if np.any(j_vector) == 1 and not check_j(j_vector, i):
+                        print(f"Count: {count}, Fail {seq}")
                         print(f"m: {m}, j: {j}, i: {i}, k: {k}, l: {l}")
                         print(j_vector)
                         print("\n")
-                        # return False
-    # # count = count + 1
-    # if count % 1000 == 0:
-    #     print(f"Pass {count}")
-    # return True
+    count = count + 1
+    if count % 1000 == 0:
+        print(f"Pass {count}")
+    return True
         
-# not_failed = True
-# for x in range(num_tests):
-#   if not_failed:
-#     seq = ""
-#     for _ in range(random.randint(max_length-5, max_length)):
-#       seq += str(random.choice(alphabet))
-#     not_failed = gen_j_vector(seq, x)
+not_failed = True
+for x in range(num_tests):
+    if not_failed:
+        seq = ""
+        for _ in range(random.randint(max_length-5, max_length)):
+            seq += str(random.choice(alphabet))
+        seq = "abcdacbdcdab"
+    not_failed = gen_j_vector(seq, x)
 
-gen_j_vector("wxyzabcwxabyzcabcwxyz")
-
-"""
+# gen_j_vector("wxyzabcwxabyzcabcwxyz")
