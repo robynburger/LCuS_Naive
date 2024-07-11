@@ -68,7 +68,7 @@ def gen_D(seq, count):
                                     print(f"gamma(m-1, k, seq) = {gamma(m-1, k, seq)}")
                                     sys.exit("ERROR!")
                         
-                            """
+                            
                             #print(f" sk = {seq[k-1]} != sm={seq[m-1]}, and sk= si={seq[i-1]}") 
                             # if d[m, i, j, k, l] ==  d[m-1, i, j, k, l]:
                             #   num_k = num_k + 1
@@ -89,7 +89,7 @@ def gen_D(seq, count):
                                
 
                              #print(f"neither:  d[m, i, j, k, l] = { d[m, i, j, k, l]},  d[m-1, i, j, k, l] = { d[m-1, i, j, k, l]},  d[m, i, j, k-1, l] = { d[m, i, j, k-1, l]}")
-                            """
+                            
 
     if count % 1000 == 0:
         print(f"PASSED. {count}")
